@@ -22,6 +22,7 @@ const IMG = {read("data/images.json")};
 {read("src/packshot.js")}
 {read("src/i18n.js")}
 {read("src/illustrations.js")}
+{read("src/recipes.js")}
 {read("src/app.js")}
 </script>
 </body>

@@ -89,8 +89,7 @@ function drawHome() {
   const MQ = ['Daawat', 'Tropical Sun', 'Dudu Osun', 'Cantu', 'Old Jamaica', 'Chaokoh', 'Goya', 'Tilda', 'Encona', 'Power Malt', 'Aunt Jackie\'s', 'Shan', 'Knorr', 'Vimto', 'Africa Village', 'Creme of Nature'];
   $('#mq').innerHTML = MQ.concat(MQ).map(b => `<span>${esc(b)}</span>`).join('');
   $$('.t-day').forEach(e => e.textContent = longDay(SL[0].date)); $$('.t-cut').forEach(e => e.textContent = cutoffText());
-  const KC = [['African', 'af', 'Gari, fufu, attiéké, pepper soup spice, malt and black soap.', [73, 62, 20], '1763048443535-1243379234e2'], ['Caribbean', 'ca', 'Jerk seasoning, hot pepper sauce, ginger beer and pigeon peas.', [2, 5, 15], '1574803636191-b2bbb307e9c6'], ['Asian', 'as', 'Basmati and sella rice, biryani mixes, dal, cumin and coconut milk.', [9, 24, 66], '1782541370275-6761522e39d1']];
-  $('#kgrid').innerHTML = KC.map(([k, c, d, im, ph], i) => { const n = P.filter(p => kitchenOf(p) === k).length; return `<a class="kcard ${c} rv" style="--d:${i * .08}s" href="#shop" data-kitchen="${k}"><span class="kph-bg"><img loading="lazy" src="https://images.unsplash.com/photo-${ph}?w=900&q=70&auto=format&fit=crop" alt="" onerror="this.closest('.kcard').classList.add('off')"></span><span class="ktag">${T('nProducts', { n })}</span><div><h3>${k} kitchen</h3><p>${d}</p></div><span class="kfoot"><span class="arrow" aria-hidden="true">→</span>Explore</span><span class="kimgs" aria-hidden="true">${im.map(i => `<span class="kph">${pic(P[i], true)}</span>`).join('')}</span></a>`; }).join('');
+  drawRecipesHome();
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
   const cc = {}; P.forEach(p => cc[p.cat] = (cc[p.cat] || 0) + 1);
   $('#aislerow').innerHTML = AI.slice(0, 7).concat(AI.slice(7, 14)).map(([c, i]) => `<a class="aisle3" href="#shop" data-cat="${esc(c)}"><span class="c">${pic(P[i])}</span>${esc(c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'))}<small>${T(cc[c] === 1 ? 'nItem' : 'nItems', { n: cc[c] })}</small></a>`).join('');
@@ -254,6 +253,8 @@ document.addEventListener('click', e => {
   const sv = t.closest('[data-save]'); if (sv) { const id = +sv.dataset.save; delete cart[id]; saved = [id, ...saved.filter(x => x !== id)]; persist(); updCart(); return; }
   const mv = t.closest('[data-move]'); if (mv) { const id = +mv.dataset.move; saved = saved.filter(x => x !== id); cart[id] = (cart[id] || 0) + 1; persist(); updCart(); return; }
   const us = t.closest('[data-unsave]'); if (us) { saved = saved.filter(x => x !== +us.dataset.unsave); persist(); drawCart(); return; }
+  const rid = t.closest('[data-rid]'); if (rid) { curR = RX(rid.dataset.rid) || curR; store.set('mt-rcp', curR.id); drawRecipe(); if (location.hash === '#recipe') scrollTo(0, 0); }
+  const aa = t.closest('[data-addall]'); if (aa) { const r = RX(aa.dataset.addall); r.prods.forEach(id => cart[id] = Math.min(99, (cart[id] || 0) + 1)); persist(); updCart(); refreshTiles(); flyToCart(aa, P[r.prods[0]]); toast(`${esc(T('addedN', { n: r.prods.length }))} <a href="#cart">${TR('Go to cart')}</a>`); return; }
   const pid = t.closest('[data-pid]'); if (pid) { openProduct(byId(pid.dataset.pid)); $('#suggest').hidden = true; if (location.hash === '#product') scrollTo(0, 0); }
   const c = t.closest('[data-cat]'); if (c) { resetF(); F.cat = c.dataset.cat; $('#hq').value = ''; drawResults(); closeSide(); if (location.hash === '#shop') scrollTo(0, 0); }
   const kk = t.closest('[data-kitchen]'); if (kk) { resetF(); F.kitchen = kk.dataset.kitchen; $('#hq').value = ''; drawResults(); closeSide(); if (location.hash === '#shop') scrollTo(0, 0); }
@@ -328,16 +329,16 @@ $$('form[data-demo]').forEach(fm => fm.addEventListener('submit', e => { e.preve
 $('#backTop').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
 /* ---------- router ---------- */
-const ROUTES = ['home', 'shop', 'product', 'cart', 'checkout', 'order', 'wishlist', 'account', 'about', 'delivery', 'contact', 'terms'];
-const TITLES = { shop: 'Results', cart: 'Shopping Cart', checkout: 'Checkout', order: 'Order placed', wishlist: 'Wishlist', account: 'Sign in', about: 'Our store', delivery: 'Delivery', contact: 'Customer service', terms: 'Terms of sale' };
+const ROUTES = ['home', 'recipes', 'recipe', 'shop', 'product', 'cart', 'checkout', 'order', 'wishlist', 'account', 'about', 'delivery', 'contact', 'terms'];
+const TITLES = { recipes: 'Recipes', recipe: 'Recipes', shop: 'Results', cart: 'Shopping Cart', checkout: 'Checkout', order: 'Order placed', wishlist: 'Wishlist', account: 'Sign in', about: 'Our store', delivery: 'Delivery', contact: 'Customer service', terms: 'Terms of sale' };
 function route() {
   let r = location.hash.slice(1); if (!ROUTES.includes(r)) r = 'home';
   if (r === 'checkout' && !ids().length) { location.hash = 'cart'; return; }
   if (r === 'order' && !$('#oRef').textContent) { location.hash = 'home'; return; }
   $$('.route').forEach(s => { const on = s.dataset.route === r; if (on && s.hidden) { s.classList.remove('enter'); void s.offsetWidth; s.classList.add('enter'); } s.hidden = !on; });
   closeSide(); $('#suggest').hidden = true;
-  if (r === 'cart') drawCart(); if (r === 'wishlist') drawWish(); if (r === 'checkout') { syncZoneSelect(); drawCheckout(); } if (r === 'home') drawRecent(); if (r === 'shop') drawResults();
-  document.title = r === 'home' ? 'Marché Tropical' : (r === 'product' ? cur.name : TR(TITLES[r])) + ' | Marché Tropical';
+  if (r === 'recipes') drawRecipesAll(); if (r === 'recipe') drawRecipe(); if (r === 'cart') drawCart(); if (r === 'wishlist') drawWish(); if (r === 'checkout') { syncZoneSelect(); drawCheckout(); } if (r === 'home') drawRecent(); if (r === 'shop') drawResults();
+  document.title = r === 'home' ? 'Marché Tropical' : (r === 'product' ? cur.name : r === 'recipe' ? RT(curR).n : TR(TITLES[r])) + ' | Marché Tropical';
   scrollTo(0, 0);
   observeReveals(); if (r === 'home') HS.show(HS.i);
   if (r === 'home' && window.__gotoZone) { window.__gotoZone = false; setTimeout(() => $('#zoneCheck').scrollIntoView({ behavior: 'smooth' }), 120); }
@@ -345,6 +346,40 @@ function route() {
 addEventListener('hashchange', route);
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- recipes ---------- */
+let rKit = 'African', rAllKit = '', curR = RX(store.get('mt-rcp', 'jollof')) || RECIPES[0];
+const CLOCK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+const yieldTxt = r => r.pieces ? T('pieces', { n: r.pieces }) : T('serves', { n: r.serves });
+const inStoreTxt = r => r.prods.length ? T('inStore', { n: r.prods.length }) : TR('Simple pantry ingredients');
+function rcard(r) { const t = RT(r); return `<a class="rcard" href="#recipe" data-rid="${r.id}"><span class="rimg"><img loading="lazy" src="${RPH(r, 700)}" alt="" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="${RILL[r.k]}" aria-hidden="true"></span><span class="rk ${KCLS[r.k]}">${r.k}</span><span class="rtime">${CLOCK}${T('mins', { n: r.min })}</span></span><span class="rb"><b>${esc(t.n)}</b><span class="rd">${esc(t.d)}</span><span class="rf"><span>${esc(inStoreTxt(r))} · ${esc(yieldTxt(r))}</span><span class="go">${TR('View recipe')} →</span></span></span></a>`; }
+function drawRecipesHome() {
+  const g = $('#rcpGrid'); if (!g) return; g.innerHTML = RECIPES.filter(r => r.k === rKit).map(rcard).join(''); drawIllus(g); swapAnim(g);
+  $$('#rcpTabs [data-rk]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.rk === rKit)));
+  const l = $('#rcpShopK'); l.dataset.kitchen = rKit; l.innerHTML = `Shop the ${rKit} kitchen <span aria-hidden="true">→</span>`;
+}
+function drawRecipesAll() {
+  const g = $('#rcpAll'); g.innerHTML = RECIPES.filter(r => !rAllKit || r.k === rAllKit).map(rcard).join(''); drawIllus(g); swapAnim(g);
+  $$('#rcpAllTabs [data-rka]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.rka === rAllKit)));
+}
+function drawRecipe() {
+  const r = curR, t = RT(r), fig = $('#rFig'), img = $('#rImg');
+  $('#rCrumb').textContent = t.n; $('#rKit').textContent = `${r.k} kitchen`; $('#rName').textContent = t.n; $('#rDesc').textContent = t.d;
+  img.onerror = () => fig.classList.add('off'); if (img.getAttribute('src') !== RPH(r, 1200)) { fig.classList.remove('off'); img.src = RPH(r, 1200); } img.alt = t.n;
+  const fb = fig.querySelector('.ph-fb'); fb.dataset.illus = RILL[r.k]; delete fb.dataset.drawn; drawIllus(fig);
+  $('#rMeta').innerHTML = `<li>${CLOCK}${T('mins', { n: r.min })}</li><li>${esc(yieldTxt(r))}</li><li>${esc(inStoreTxt(r))}</li>`;
+  const total = r.prods.reduce((a, id) => a + P[id].price, 0);
+  $('#rBuy').innerHTML = r.prods.length ? `<button class="btn y lg" data-addall="${r.id}">${esc(T('addAll', { n: r.prods.length, x: eur(total) }))}</button><p class="rbuy-note">${TR('Adds one of each to your cart.')}</p>` : `<p class="rbuy-note">${TR('Everything here is a simple pantry ingredient.')}</p>`;
+  $('#rShelf').hidden = !r.prods.length;
+  $('#rProds').innerHTML = r.prods.map(id => { const p = P[id]; return `<div class="rprod"><a class="im" href="#product" data-pid="${p.id}" aria-label="${esc(p.name)}">${pic(p)}</a><div><a class="nm" href="#product" data-pid="${p.id}">${esc(p.name)}</a><span class="pp">${eur(p.price)}</span></div><div class="ctl" data-ctl="${p.id}">${ctl(p.id)}</div></div>`; }).join('');
+  $('#rOther').innerHTML = t.o.map(x => `<li>${esc(x)}</li>`).join('');
+  $('#rSteps').innerHTML = t.s.map(x => `<li><span>${esc(x)}</span></li>`).join('');
+  $('#rMoreH').textContent = `More ${r.k} recipes`;
+  const more = RECIPES.filter(x => x.k === r.k && x.id !== r.id).concat(RECIPES.filter(x => x.k !== r.k)).slice(0, 3);
+  $('#rMore').innerHTML = more.map(rcard).join(''); drawIllus($('#rMore'));
+}
+$('#rcpTabs').addEventListener('click', e => { const b = e.target.closest('[data-rk]'); if (b) { rKit = b.dataset.rk; drawRecipesHome(); } });
+$('#rcpAllTabs').addEventListener('click', e => { const b = e.target.closest('[data-rka]'); if (b) { rAllKit = b.dataset.rka; drawRecipesAll(); } });
+
 /* ---------- hero slider ---------- */
 const HS = (() => {
   const hero = $('#hero'), slides = $$('#hsStage .hs'), dots = $$('#hsDots .hs-dot'), DUR = 6500; let i = 0, timer = null, paused = false, hold = false;
@@ -383,8 +418,8 @@ function bumpBadge() { const b = $('#cartCount'); b.classList.remove('bump'); vo
 function setLang(l) {
   if (!LANGS.includes(l)) return; LANG = l; try { localStorage.setItem('mt-lang', l); } catch (e) {}
   document.documentElement.lang = l; $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
-  drawHome(); drawResults(); drawProduct(); fillZoneSelect(); updCart(); updWish(); drawZoneInfo();
-  const r = location.hash.slice(1); if (r === 'cart') drawCart(); if (r === 'wishlist') drawWish(); if (r === 'checkout') drawCheckout();
+  drawHome(); drawResults(); drawProduct(); drawRecipesAll(); drawRecipe(); fillZoneSelect(); updCart(); updWish(); drawZoneInfo();
+  const r = location.hash.slice(1); if (r === 'recipes') drawRecipesAll(); if (r === 'recipe') drawRecipe(); if (r === 'cart') drawCart(); if (r === 'wishlist') drawWish(); if (r === 'checkout') drawCheckout();
   translateNode(document.body); observeReveals(); $$('.rv, .rv-zoom').forEach(el => { const b = el.getBoundingClientRect(); if (b.top < innerHeight && b.bottom > 0) el.classList.add('in'); });
   const t = location.hash.slice(1); document.title = (!t || t === 'home') ? 'Marché Tropical' : (t === 'product' ? cur.name : TR(TITLES[t] || '')) + ' | Marché Tropical';
 }

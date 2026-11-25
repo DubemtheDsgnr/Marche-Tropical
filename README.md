@@ -9,6 +9,7 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 ## What's in it
 
 * Home: a 5 slide hero carousel that keeps rotating (with a pause button, arrows, dots, swipe and keyboard), shop by kitchen (African, Caribbean, Asian), aisles, popular products with tabs, bulk buys, a delivery zone checker, shop hours and newsletter sign up
+* Recipes from our kitchens: 12 recipes (African: jollof rice, attiéké with grilled fish, poulet DG, eru, egusi soup, puff puff; Caribbean: jerk chicken, rice and peas; Asian: Chinese stir fried noodles, chicken biryani, Thai green curry, perfect basmati rice), each with ingredients, method and an add all ingredients to cart button for the products we stock
 * Search with live suggestions, results with department, price and brand filters, sorting and pages
 * Product pages with gallery, details and a buy box (delivery day, quantity, add to cart, buy now, wishlist)
 * Cart with quantity steppers, save for later and a free delivery progress bar
@@ -29,7 +30,7 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 ```
 index.html        built page, open this
 build.py          rebuilds index.html from src/ and data/
-src/              base.css, theme.css, motion.css, body.html, app.js, i18n.js (EN, FR, DE), illustrations.js, packshot.js
+src/              base.css, theme.css, motion.css, body.html, app.js, i18n.js (EN, FR, DE), recipes.js, illustrations.js, packshot.js
 data/             products.json, images.json (embedded product photos), logo.json
 assets/logo.png   the Marché Tropical logo
 ```
@@ -46,6 +47,7 @@ Lifestyle photos are free to use under the [Unsplash License](https://unsplash.c
 * Chicken biryani: Super deluxe kitchen
 * Spice market: diego fabra
 * Fruit stand trader: Omotayo Tajudeen
+* Recipe photos (jollof, puff puff, eru, poulet DG, fried fish, rice and peas, noodles, green curry, rice): Unsplash contributors, see the photo IDs in `src/recipes.js`
 
 When a photo cannot load, a matching illustration is shown instead.
 

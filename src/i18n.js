@@ -327,6 +327,15 @@ const DICT = {
 "Steep in hot water, sweeten and serve chilled over ice.": ["Faites infuser dans l'eau chaude, sucrez et servez bien frais avec des glaçons.", "In heißem Wasser ziehen lassen, süßen und gekühlt auf Eis servieren."],
 "Open cart": ["Ouvrir le panier", "Warenkorb öffnen"],
 "Remove": ["Retirer", "Entfernen"],
+"Recipes from our kitchens": ["Recettes de nos cuisines", "Rezepte aus unseren Küchen"],
+"Recipes": ["Recettes", "Rezepte"], "All recipes": ["Toutes les recettes", "Alle Rezepte"], "View recipe": ["Voir la recette", "Zum Rezept"],
+"Ingredients": ["Ingrédients", "Zutaten"], "From our shelves": ["Dans nos rayons", "Aus unseren Regalen"], "You'll also need": ["Il vous faudra aussi", "Außerdem brauchen Sie"],
+"Method": ["Préparation", "Zubereitung"], "Keep cooking": ["Continuez à cuisiner", "Weiterkochen"],
+"Simple pantry ingredients": ["Ingrédients du placard", "Einfache Vorratszutaten"],
+"Adds one of each to your cart.": ["Ajoute un exemplaire de chaque au panier.", "Legt je ein Stück in den Warenkorb."],
+"Everything here is a simple pantry ingredient.": ["Tout ici se trouve dans un placard de cuisine.", "Hier brauchen Sie nur einfache Vorratszutaten."],
+"More African recipes": ["Plus de recettes africaines", "Mehr afrikanische Rezepte"], "More Caribbean recipes": ["Plus de recettes caribéennes", "Mehr karibische Rezepte"], "More Asian recipes": ["Plus de recettes asiatiques", "Mehr asiatische Rezepte"],
+"Dishes from Africa, the Caribbean and Asia, with the ingredients we stock ready to add to your cart.": ["Des plats d'Afrique, des Caraïbes et d'Asie, avec les ingrédients que nous vendons prêts à ajouter au panier.", "Gerichte aus Afrika, der Karibik und Asien, mit den Zutaten aus unserem Sortiment direkt für Ihren Warenkorb."],
 "Egusi, gari and fufu,": ["Egusi, gari et fufu,", "Egusi, Gari und Fufu,"],
 "just like home.": ["comme à la maison.", "wie zu Hause."],
 "Gari from Ghana and Togo, plantain fufu, attiéké, pepper soup spice and the seasonings that make the pot.": ["Gari du Ghana et du Togo, fufu de plantain, attiéké, épices pour pepper soup et les assaisonnements qui font la marmite.", "Gari aus Ghana und Togo, Fufu aus Kochbananen, Attiéké, Pepper Soup Gewürz und die Würzmittel, die den Topf ausmachen."],
@@ -397,6 +406,10 @@ const TPL = {
   cartAria: ['Cart, {n} items', 'Panier, {n} articles', 'Warenkorb, {n} Artikel'],
   yourArea: ['your area', 'votre zone', 'Ihr Gebiet'],
   zoneName: ['Zone {z}', 'zone {z}', 'Gebiet {z}'],
+  mins: ['{n} min', '{n} min', '{n} Min.'], serves: ['Serves {n}', 'Pour {n} personnes', 'Für {n} Personen'], pieces: ['Makes {n}', '{n} pièces', '{n} Stück'],
+  inStore: ['{n} ingredients in store', '{n} ingrédients en magasin', '{n} Zutaten im Laden'],
+  addAll: ['Add {n} ingredients to cart · {x}', 'Ajouter {n} ingrédients au panier · {x}', '{n} Zutaten in den Warenkorb · {x}'],
+  addedN: ['{n} ingredients added to cart', '{n} ingrédients ajoutés au panier', '{n} Zutaten in den Warenkorb gelegt'],
   deliverToLabel: ['Deliver to {area}', 'Livrer à {area}', 'Liefern nach {area}']
 };
 const LANGS = ['en', 'fr', 'de'], LOCALE = { en: 'en-GB', fr: 'fr-LU', de: 'de-LU' };

@@ -23,7 +23,7 @@
 <nav class="catnav" aria-label="Departments"><div class="wrap catnav-in">
 <button class="allbtn" id="allBtn"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>All departments</button>
 <span class="vr" aria-hidden="true"></span>
-<a href="#shop" data-cat="Spices & Seasoning">Spices</a><a href="#shop" data-cat="Rice, Pasta & Noodles">Rice</a><a href="#shop" data-cat="Gari & Fufu">Gari &amp; fufu</a><a href="#shop" data-cat="Sauces & Marinades">Sauces</a><a href="#shop" data-cat="Drinks">Drinks</a><a href="#shop" data-cat="Beans">Beans</a><a href="#shop" data-cat="Hair, Beauty & Health">Hair &amp; beauty</a><a href="#shop" data-deal="bulk">Bulk</a><a href="#shop" data-deal="under2" class="hot">Under 2 €</a>
+<a href="#shop" data-cat="Spices & Seasoning">Spices</a><a href="#shop" data-cat="Rice, Pasta & Noodles">Rice</a><a href="#shop" data-cat="Gari & Fufu">Gari &amp; fufu</a><a href="#shop" data-cat="Sauces & Marinades">Sauces</a><a href="#shop" data-cat="Drinks">Drinks</a><a href="#shop" data-cat="Beans">Beans</a><a href="#shop" data-cat="Hair, Beauty & Health">Hair &amp; beauty</a><a href="#shop" data-deal="bulk">Bulk</a><a href="#shop" data-deal="under2" class="hot">Under 2 €</a><a href="#recipes" class="rlink">Recipes</a>
 <span class="kitnav"><span class="muted">Shop by kitchen</span><a href="#shop" data-kitchen="African" class="k k-af">African</a><a href="#shop" data-kitchen="Caribbean" class="k k-ca">Caribbean</a><a href="#shop" data-kitchen="Asian" class="k k-as">Asian</a></span>
 </div></nav>
 </header>
@@ -32,7 +32,7 @@
 <div class="side-bg" id="sideBg" hidden></div>
 <aside class="side-nav" id="side" hidden aria-label="All categories">
 <div class="side-hd"><span class="avatar" aria-hidden="true"></span><b>Hello, sign in</b><button class="xbtn" id="sideClose" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-<div class="side-body"><h3>Language</h3><div class="side-lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="fr" aria-pressed="false">Français</button><button type="button" data-lang="de" aria-pressed="false">Deutsch</button></div><h3>Shop by department</h3><div id="sideCats"></div><h3>Deals</h3><a href="#shop" data-deal="under2">Under 2 €</a><a href="#shop" data-deal="bulk">Bulk buys</a><h3>Help and settings</h3><a href="#account">Your account</a><a href="#delivery">Delivery zones and fees</a><a href="#about">Our store in Remich</a><a href="#contact">Customer service</a><a href="#terms">Terms of sale</a></div>
+<div class="side-body"><h3>Language</h3><div class="side-lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="fr" aria-pressed="false">Français</button><button type="button" data-lang="de" aria-pressed="false">Deutsch</button></div><h3>Shop by department</h3><div id="sideCats"></div><h3>Recipes</h3><a href="#recipes">All recipes</a><h3>Deals</h3><a href="#shop" data-deal="under2">Under 2 €</a><a href="#shop" data-deal="bulk">Bulk buys</a><h3>Help and settings</h3><a href="#account">Your account</a><a href="#delivery">Delivery zones and fees</a><a href="#about">Our store in Remich</a><a href="#contact">Customer service</a><a href="#terms">Terms of sale</a></div>
 </aside>
 
 <main id="main">
@@ -85,9 +85,11 @@
 <div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
 </section>
 
-<section class="kitchens wrap" aria-label="Shop by kitchen">
-<div class="sec-h rv"><div><span class="eyebrow">Shop by kitchen</span><h2>Cook the way you do at home</h2></div><p class="sec-sub">Three pantries under one roof. Pick the kitchen you cook from and we'll show you the essentials.</p></div>
-<div class="kgrid" id="kgrid"></div>
+<section class="wrap rcp3" aria-label="Recipes">
+<div class="sec-h rv"><div><span class="eyebrow">Recipes from our kitchens</span><h2>Cook the way you do at home</h2></div>
+<div class="tabs" role="tablist" id="rcpTabs"><button role="tab" data-rk="African" aria-selected="true">African</button><button role="tab" data-rk="Caribbean" aria-selected="false">Caribbean</button><button role="tab" data-rk="Asian" aria-selected="false">Asian</button></div></div>
+<div class="rgrid" id="rcpGrid"></div>
+<div class="rcp-foot"><a class="btn ghost" href="#recipes">All recipes <span class="arr" aria-hidden="true">→</span></a><a class="more-l" id="rcpShopK" href="#shop" data-kitchen="African">Shop the African kitchen <span aria-hidden="true">→</span></a></div>
 </section>
 
 <section class="wrap aisles3" aria-label="Aisles">
@@ -137,6 +139,28 @@
 
 <section class="wrap news3 rv"><div class="news-ill" data-illus="basket" aria-hidden="true"></div><div><h2>New on the shelves, first.</h2><p class="muted">Restocks and new arrivals, straight to your inbox.</p></div><form class="news-form" data-demo="Thanks! You're on the list for this demo."><label class="sr" for="nEm">Email address</label><input class="input" id="nEm" type="email" placeholder="you@example.com"><button class="btn y" type="submit">Subscribe</button></form></section>
 </section>
+
+<!-- RECIPES -->
+<section class="route" data-route="recipes" hidden>
+<section class="pagehero"><div class="wrap pagehero-in"><div class="rv"><span class="eyebrow">Recipes</span><h1>Recipes from our kitchens</h1><p class="lead">Dishes from Africa, the Caribbean and Asia, with the ingredients we stock ready to add to your cart.</p>
+<div class="tabs" role="tablist" id="rcpAllTabs"><button role="tab" data-rka="" aria-selected="true">All</button><button role="tab" data-rka="African" aria-selected="false">African</button><button role="tab" data-rka="Caribbean" aria-selected="false">Caribbean</button><button role="tab" data-rka="Asian" aria-selected="false">Asian</button></div></div>
+<div class="vanroad big rv" data-illus="basket" aria-hidden="true"></div></div></section>
+<div class="wrap" style="padding-top:40px;padding-bottom:72px"><div class="rgrid" id="rcpAll"></div></div>
+</section>
+
+<!-- RECIPE -->
+<section class="route" data-route="recipe" hidden><div class="wrap rdet">
+<nav class="crumbs small" aria-label="Breadcrumb"><a href="#recipes">Recipes</a> › <span id="rCrumb"></span></nav>
+<div class="rhead">
+<figure class="ph ph-rcp" id="rFig"><img class="photo" id="rImg" alt=""><span class="ph-fb" data-illus="pot" aria-hidden="true"></span></figure>
+<div class="rinfo"><span class="eyebrow" id="rKit"></span><h1 id="rName"></h1><p class="lead" id="rDesc"></p><ul class="rmeta" id="rMeta"></ul><div id="rBuy"></div></div>
+</div>
+<div class="rbody">
+<div class="ring"><h2>Ingredients</h2><div id="rShelf"><h3>From our shelves</h3><div id="rProds"></div></div><h3>You'll also need</h3><ul class="rother" id="rOther"></ul></div>
+<div class="rsteps"><h2>Method</h2><ol id="rSteps"></ol></div>
+</div>
+<section class="rmore"><div class="sec-h"><div><span class="eyebrow">Keep cooking</span><h2 id="rMoreH"></h2></div><a class="more-l" href="#recipes">All recipes <span aria-hidden="true">→</span></a></div><div class="rgrid" id="rMore"></div></section>
+</div></section>
 
 <!-- RESULTS -->
 <section class="route" data-route="shop" hidden>
@@ -290,7 +314,7 @@
 <footer class="ft3">
 <div class="wrap ft3-top">
 <div class="ft3-brand"><a class="ftlogo" href="#home" aria-label="Marché Tropical home"><img class="logo-img" src="__LOGO__" alt="Marché Tropical" width="342" height="120"></a><p>African, Caribbean and Asian groceries from our shop in Remich, delivered across Luxembourg and to Perl and Sierck les Bains.</p><p class="small">39 Rue Enz, 5532 Remich<br>+352 621 751 400 · info@marchetropical.lu</p></div>
-<div><h4>Shop</h4><a href="#shop" data-cat="">All products</a><a href="#shop" data-kitchen="African">African kitchen</a><a href="#shop" data-kitchen="Caribbean">Caribbean kitchen</a><a href="#shop" data-kitchen="Asian">Asian kitchen</a><a href="#shop" data-deal="bulk">Bulk buys</a></div>
+<div><h4>Shop</h4><a href="#shop" data-cat="">All products</a><a href="#shop" data-kitchen="African">African kitchen</a><a href="#shop" data-kitchen="Caribbean">Caribbean kitchen</a><a href="#shop" data-kitchen="Asian">Asian kitchen</a><a href="#shop" data-deal="bulk">Bulk buys</a><a href="#recipes">Recipes</a></div>
 <div><h4>Delivery</h4><a href="#delivery">Zones and fees</a><a href="#delivery">Tuesday and Thursday</a><a href="#terms">Complaints and returns</a></div>
 <div><h4>Help</h4><a href="#account">Your account</a><a href="#cart">Your cart</a><a href="#wishlist">Saved items</a><a href="#contact">Contact us</a><a href="#terms">Terms of sale</a></div>
 </div>
