@@ -230,11 +230,11 @@
 .hs-dot i { display: block; width: 100%; height: 4px; border-radius: 4px; background: #E4DED3; overflow: hidden; position: relative; }
 .hs-dot.on { width: 56px; }
 .hs-dot.on i::after { content: ""; position: absolute; inset: 0; background: var(--or); transform-origin: left; animation: hsprog var(--dur, 6s) linear forwards; }
-.hero4.paused .hs-dot.on i::after, .hero4.hold .hs-dot.on i::after { animation-play-state: paused; }
+.hero4.paused .hs-dot.on i::after { animation-play-state: paused; }
 .hero4.still .hs-dot.on i::after { animation: none; transform: none; }
 .hero4 .marquee { margin-top: 0; }
 @keyframes hsprog { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@media (prefers-reduced-motion: reduce) { .hs, .hs.on { transition: none; } .hs-a { opacity: 1; transform: none; } .hs .ticket, .hs .pcardh { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hs-dot.on i::after { animation: hsprog var(--dur, 6s) linear forwards !important; } .hs, .hs.on { transition: none; } .hs-a { opacity: 1; transform: none; } .hs .ticket, .hs .pcardh { opacity: 1; transform: none; } }
 @media (max-width: 1180px) { .hs { gap: 36px; } }
 @media (max-width: 900px) { .hs { grid-template-columns: minmax(0, 1fr); gap: 24px; } .hs .h4art { order: -1; } }
 @media (max-width: 760px) {

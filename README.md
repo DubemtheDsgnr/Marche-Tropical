@@ -8,7 +8,7 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 
 ## What's in it
 
-* Home: a 5 slide hero carousel (autoplay with pause, arrows, dots, swipe and keyboard), shop by kitchen (African, Caribbean, Asian), aisles, popular products with tabs, bulk buys, a delivery zone checker, shop hours and newsletter sign up
+* Home: a 5 slide hero carousel that keeps rotating (with a pause button, arrows, dots, swipe and keyboard), shop by kitchen (African, Caribbean, Asian), aisles, popular products with tabs, bulk buys, a delivery zone checker, shop hours and newsletter sign up
 * Search with live suggestions, results with department, price and brand filters, sorting and pages
 * Product pages with gallery, details and a buy box (delivery day, quantity, add to cart, buy now, wishlist)
 * Cart with quantity steppers, save for later and a free delivery progress bar

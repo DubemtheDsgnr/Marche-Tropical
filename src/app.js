@@ -350,18 +350,15 @@ const HS = (() => {
   const hero = $('#hero'), slides = $$('#hsStage .hs'), dots = $$('#hsDots .hs-dot'), DUR = 6500; let i = 0, timer = null, paused = false, hold = false;
   hero.style.setProperty('--dur', DUR + 'ms');
   const show = n => { i = (n + slides.length) % slides.length; slides.forEach((s, k) => { const on = k === i; s.classList.toggle('on', on); s.setAttribute('aria-hidden', String(!on)); s.querySelectorAll('a, button').forEach(x => x.tabIndex = on ? 0 : -1); }); dots.forEach((d, k) => { d.classList.toggle('on', k === i); d.setAttribute('aria-current', String(k === i)); const b = d.querySelector('i'); b.replaceWith(b.cloneNode()); }); schedule(); };
-  const schedule = () => { clearTimeout(timer); if (paused || hold || reduced() || location.hash.slice(1) && location.hash !== '#home') return; timer = setTimeout(() => show(i + 1), DUR); };
+  const schedule = () => { clearTimeout(timer); if (paused || location.hash.slice(1) && location.hash !== '#home') return; timer = setTimeout(() => show(i + 1), DUR); };
   $('#hsPrev').onclick = () => show(i - 1); $('#hsNext').onclick = () => show(i + 1);
   dots.forEach(d => d.onclick = () => show(+d.dataset.go));
   $('#hsPause').onclick = () => { paused = !paused; $('#hsPause').setAttribute('aria-pressed', String(paused)); $('#hsPause').setAttribute('aria-label', TR(paused ? 'Play slideshow' : 'Pause slideshow')); hero.classList.toggle('paused', paused); schedule(); };
   const setHold = v => { hold = v; hero.classList.toggle('hold', v); if (v) clearTimeout(timer); else show(i); };
-  $('#hsStage').addEventListener('mouseenter', () => setHold(true)); $('#hsStage').addEventListener('mouseleave', () => setHold(false));
-  hero.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) setHold(true); }); hero.addEventListener('focusout', e => { if (!hero.contains(e.relatedTarget)) setHold(false); });
   hero.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
   let x0 = null; $('#hsStage').addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
   $('#hsStage').addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 45) show(i + (dx < 0 ? 1 : -1)); x0 = null; });
   document.addEventListener('visibilitychange', () => document.hidden ? clearTimeout(timer) : schedule());
-  if (reduced()) hero.classList.add('still');
   return { show, schedule, get i() { return i; } };
 })();
 
