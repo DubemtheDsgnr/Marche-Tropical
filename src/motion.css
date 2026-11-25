@@ -195,3 +195,9 @@
   .langsw button { padding: 5px 7px; }
 }
 .kcard.off .kph-bg { display: none; }
+/* smaller logo */
+.hd .logo-img { height: 44px; }
+.hd-in { min-height: 72px; }
+.ft3 .ftlogo .logo-img { height: 38px; }
+.authlogo .logo-img { height: 48px; }
+@media (max-width: 760px) { .hd .logo-img { height: 34px; } }
