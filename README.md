@@ -18,7 +18,7 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 
 ## Content
 
-* 80 real products with their names, brands and prices from the current shop
+* 80 real products with their names, brands, prices and photos from the current shop
 * Brand colours from the logo: orange `#FF6500` and green `#0F6D1E`; typeface Inter
 * Delivery zones, fees, hours, address and legal details from the current site
 
@@ -34,11 +34,11 @@ assets/logo.png   the Marché Tropical logo
 
 After editing anything in `src/` or `data/`, run `python3 build.py`.
 
-## Image credits
+## Product photos
 
-Product photos are illustrative, not the actual packs. They come from two openly licensed image sets, both dedicated to the public domain under CC0 1.0:
+Product photos are the shop's own catalogue images, loaded live from the Odoo store (`/web/image/product.template/<id>/image_512`), so they always match what is in the shop. If a photo cannot load, for example offline or inside a sandbox that blocks other websites, the page falls back to an illustrative image from two openly licensed sets, both dedicated to the public domain under CC0 1.0:
 
 * [ingredient-icons](https://github.com/EBf-Studio/ingredient-icons) by Marmalade (npm `@ingredient-icons/core`)
 * [Ingredient Atlas](https://github.com/ionmesca/ingredient-atlas) (personal care images)
 
-Products without a matching photo use a drawn pack illustration (`src/packshot.js`). On the live Odoo store, the shop's own product photos replace these.
+Products without a fallback photo use a drawn pack illustration (`src/packshot.js`).

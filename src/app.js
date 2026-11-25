@@ -3,7 +3,14 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const eur = n => n.toFixed(2).replace('.', ',') + ' €';
 const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
 const P = PRODUCTS, byId = id => P[+id];
-const SV = {}; const pic = (p, eager) => p.img ? `<img src="${IMG[p.img]}" alt="" ${eager ? '' : 'loading="lazy"'} decoding="async">` : (SV[p.id] || (SV[p.id] = packshot(p)));
+const SHOP_IDS = [262,256,255,254,253,252,251,250,248,244,242,240,239,238,237,236,235,234,233,225,223,222,217,215,213,212,211,209,208,196,189,188,184,181,179,178,177,176,175,174,173,171,168,164,163,162,161,160,159,157,156,154,153,148,143,130,129,128,127,124,123,122,121,120,117,116,115,113,112,110,109,107,106,105,104,102,100,95,94,93];
+const SHOP_IMG = 'https://www.marchetropical.lu/web/image/product.template/';
+P.forEach((p, i) => { p.real = SHOP_IMG + SHOP_IDS[i] + '/image_512'; p.page = 'https://www.marchetropical.lu/shop/' + SHOP_IDS[i]; });
+const SV = {};
+const stock = (p, eager) => p.img ? `<img src="${IMG[p.img]}" alt="" ${eager ? '' : 'loading="lazy"'} decoding="async">` : (SV[p.id] || (SV[p.id] = packshot(p)));
+/* Real product photo from the shop; if it cannot load (offline, or a sandbox that blocks other sites), fall back to an illustrative image. */
+const pic = (p, eager) => `<img class="real" src="${p.real}" alt="" ${eager ? '' : 'loading="lazy"'} decoding="async" data-fb="${p.id}" onerror="fallbackImg(this)">`;
+window.fallbackImg = el => { const p = P[+el.dataset.fb]; if (!p) return; el.insertAdjacentHTML('afterend', stock(p, true)); el.remove(); };
 const price = (n, big) => { const [w, d] = n.toFixed(2).split('.'); return `<span class="pprice${big ? ' big' : ''}" aria-label="${eur(n)}"><span class="whole" aria-hidden="true">${w}</span><span class="dec" aria-hidden="true">,${d}</span><span class="cur" aria-hidden="true" style="margin-left:2px">€</span></span>`; };
 const kg = p => { const m = p.name.match(/(\d+(?:\.\d+)?)\s?kg/i); return m ? +m[1] : 0; };
 const isBulk = p => kg(p) >= 5;
@@ -77,11 +84,11 @@ const quad4 = (title, list, more, attr) => `<div class="quad"><h2>${title}</h2><
 
 /* ---------- home ---------- */
 function drawHome() {
-  const still = [[9, '4%', '10%', '44%'], [24, '50%', '4%', '36%'], [72, '46%', '46%', '46%'], [1, '10%', '50%', '36%'], [15, '76%', '30%', '24%']];
-  $('#still').innerHTML = still.map(([id, l, t, w]) => `<img src="${IMG[P[id].img]}" alt="" style="left:${l};top:${t};width:${w}">`).join('');
+  const still = [[9, '6%', '6%', -6], [24, '54%', '0%', 5], [73, '30%', '36%', -2], [2, '68%', '44%', 7], [15, '4%', '58%', 4]];
+  $('#still').innerHTML = still.map(([id, l, t, r]) => `<a class="pcardh" href="#product" data-pid="${id}" style="left:${l};top:${t};transform:rotate(${r}deg)" aria-label="${esc(P[id].name)}">${pic(P[id], true)}<span>${esc(P[id].brand)}<b>${eur(P[id].price)}</b></span></a>`).join('');
   $('#tDay').textContent = longDay(SL[0].date); $('#tCut').textContent = cutoffText();
   const KC = [['African', 'af', 'Gari, fufu, attiéké, pepper soup spice, malt and black soap.', [73, 62, 20]], ['Caribbean', 'ca', 'Jerk seasoning, hot pepper sauce, ginger beer and pigeon peas.', [2, 5, 15]], ['Asian', 'as', 'Basmati and sella rice, biryani mixes, dal, cumin and coconut milk.', [9, 24, 66]]];
-  $('#kgrid').innerHTML = KC.map(([k, c, d, im]) => { const n = P.filter(p => kitchenOf(p) === k).length; return `<a class="kcard ${c}" href="#shop" data-kitchen="${k}"><div><h3>${k} kitchen</h3><p>${d}</p></div><span class="kfoot"><span class="arrow" aria-hidden="true">→</span>${n} products</span><span class="kimgs" aria-hidden="true">${im.map(i => `<img src="${IMG[P[i].img]}" alt="">`).join('')}</span></a>`; }).join('');
+  $('#kgrid').innerHTML = KC.map(([k, c, d, im]) => { const n = P.filter(p => kitchenOf(p) === k).length; return `<a class="kcard ${c}" href="#shop" data-kitchen="${k}"><div><h3>${k} kitchen</h3><p>${d}</p></div><span class="kfoot"><span class="arrow" aria-hidden="true">→</span>${n} products</span><span class="kimgs" aria-hidden="true">${im.map(i => `<span class="kph">${pic(P[i], true)}</span>`).join('')}</span></a>`; }).join('');
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
   const cc = {}; P.forEach(p => cc[p.cat] = (cc[p.cat] || 0) + 1);
   $('#aislerow').innerHTML = AI.slice(0, 7).concat(AI.slice(7, 14)).map(([c, i]) => `<a class="aisle3" href="#shop" data-cat="${esc(c)}"><span class="c">${pic(P[i])}</span>${esc(c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'))}<small>${cc[c]} item${cc[c] === 1 ? '' : 's'}</small></a>`).join('');

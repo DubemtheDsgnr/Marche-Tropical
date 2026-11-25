@@ -295,3 +295,23 @@ h1, h2, h3 { letter-spacing: -0.025em; }
   .ctl .add { padding: 0 10px; }
   .pprice .whole { font-size: 19px; }
 }
+
+/* real shop photos */
+img.real { object-fit: contain; background: #fff; }
+.pt .im img.real, .pd-stage img.real, .cline .im img.real, .co-line .im img.real, .bk .im img.real, .suggest .th img.real, .toast .ti img.real { mix-blend-mode: multiply; background: transparent; }
+.pt .im { background: #fff; border: 1px solid var(--line); }
+.pd-stage { background: #fff; border: 1px solid var(--line); }
+.aisle3 .c { overflow: hidden; }
+.aisle3 .c img.real { width: 70%; height: 70%; border-radius: 12px; mix-blend-mode: multiply; }
+.pcardh { position: absolute; width: 30%; display: flex; flex-direction: column; gap: 6px; padding: 8px 8px 10px; background: #fff; border-radius: 14px; box-shadow: 0 16px 30px rgba(80,30,0,.22); text-decoration: none !important; color: var(--ink) !important; transition: transform .2s; }
+.pcardh:hover { z-index: 2; box-shadow: 0 20px 36px rgba(80,30,0,.3); }
+.pcardh img, .pcardh svg { width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: contain; border-radius: 10px; background: #fff; }
+.pcardh span { display: flex; justify-content: space-between; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--ink2); padding: 0 2px; }
+.pcardh b { color: var(--or); }
+.kcard .kimgs { width: 58%; height: 70%; }
+.kcard .kimgs .kph { position: absolute; width: 46%; aspect-ratio: 1 / 1; padding: 6px; background: #fff; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,.14); display: flex; }
+.kcard .kimgs .kph img, .kcard .kimgs .kph svg { width: 100%; height: 100%; object-fit: contain; filter: none; position: static; mix-blend-mode: normal; }
+.kcard .kimgs .kph:nth-child(1) { right: 40%; bottom: 10%; transform: rotate(-6deg); }
+.kcard .kimgs .kph:nth-child(2) { right: 4%; bottom: 34%; transform: rotate(5deg); }
+.kcard .kimgs .kph:nth-child(3) { right: 12%; bottom: -2%; transform: rotate(-2deg); }
+@media (max-width: 760px) { .pcardh { width: 34%; padding: 6px; } .pcardh span { font-size: 10px; } }
