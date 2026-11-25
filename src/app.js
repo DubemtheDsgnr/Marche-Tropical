@@ -85,11 +85,10 @@ const quad4 = (title, list, more, attr) => `<div class="quad"><h2>${title}</h2><
 
 /* ---------- home ---------- */
 function drawHome() {
-  const still = [[9, '-5%', '6%', -5], [24, '84%', '-4%', 6], [5, '80%', '62%', -4]];
-  $('#still').innerHTML = still.map(([id, l, t, r]) => `<a class="pcardh" href="#product" data-pid="${id}" style="left:${l};top:${t};rotate:${r}deg" aria-label="${esc(P[id].name)}">${pic(P[id], true)}<span>${esc(P[id].brand)}<b>${eur(P[id].price)}</b></span></a>`).join('');
+  $$('[data-floats]').forEach(el => { el.innerHTML = el.dataset.floats.split(',').map(id => { const q = P[+id]; return `<a class="pcardh" href="#product" data-pid="${q.id}" aria-label="${esc(q.name)}">${pic(q, true)}<span>${esc(q.brand)}<b>${eur(q.price)}</b></span></a>`; }).join(''); });
   const MQ = ['Daawat', 'Tropical Sun', 'Dudu Osun', 'Cantu', 'Old Jamaica', 'Chaokoh', 'Goya', 'Tilda', 'Encona', 'Power Malt', 'Aunt Jackie\'s', 'Shan', 'Knorr', 'Vimto', 'Africa Village', 'Creme of Nature'];
   $('#mq').innerHTML = MQ.concat(MQ).map(b => `<span>${esc(b)}</span>`).join('');
-  $('#tDay').textContent = longDay(SL[0].date); $('#tCut').textContent = cutoffText();
+  $$('.t-day').forEach(e => e.textContent = longDay(SL[0].date)); $$('.t-cut').forEach(e => e.textContent = cutoffText());
   const KC = [['African', 'af', 'Gari, fufu, attiéké, pepper soup spice, malt and black soap.', [73, 62, 20], '1763048443535-1243379234e2'], ['Caribbean', 'ca', 'Jerk seasoning, hot pepper sauce, ginger beer and pigeon peas.', [2, 5, 15], '1574803636191-b2bbb307e9c6'], ['Asian', 'as', 'Basmati and sella rice, biryani mixes, dal, cumin and coconut milk.', [9, 24, 66], '1782541370275-6761522e39d1']];
   $('#kgrid').innerHTML = KC.map(([k, c, d, im, ph], i) => { const n = P.filter(p => kitchenOf(p) === k).length; return `<a class="kcard ${c} rv" style="--d:${i * .08}s" href="#shop" data-kitchen="${k}"><span class="kph-bg"><img loading="lazy" src="https://images.unsplash.com/photo-${ph}?w=900&q=70&auto=format&fit=crop" alt="" onerror="this.closest('.kcard').classList.add('off')"></span><span class="ktag">${T('nProducts', { n })}</span><div><h3>${k} kitchen</h3><p>${d}</p></div><span class="kfoot"><span class="arrow" aria-hidden="true">→</span>Explore</span><span class="kimgs" aria-hidden="true">${im.map(i => `<span class="kph">${pic(P[i], true)}</span>`).join('')}</span></a>`; }).join('');
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
@@ -340,14 +339,34 @@ function route() {
   if (r === 'cart') drawCart(); if (r === 'wishlist') drawWish(); if (r === 'checkout') { syncZoneSelect(); drawCheckout(); } if (r === 'home') drawRecent(); if (r === 'shop') drawResults();
   document.title = r === 'home' ? 'Marché Tropical' : (r === 'product' ? cur.name : TR(TITLES[r])) + ' | Marché Tropical';
   scrollTo(0, 0);
-  observeReveals();
+  observeReveals(); if (r === 'home') HS.show(HS.i);
   if (r === 'home' && window.__gotoZone) { window.__gotoZone = false; setTimeout(() => $('#zoneCheck').scrollIntoView({ behavior: 'smooth' }), 120); }
 }
 addEventListener('hashchange', route);
 
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- hero slider ---------- */
+const HS = (() => {
+  const hero = $('#hero'), slides = $$('#hsStage .hs'), dots = $$('#hsDots .hs-dot'), DUR = 6500; let i = 0, timer = null, paused = false, hold = false;
+  hero.style.setProperty('--dur', DUR + 'ms');
+  const show = n => { i = (n + slides.length) % slides.length; slides.forEach((s, k) => { const on = k === i; s.classList.toggle('on', on); s.setAttribute('aria-hidden', String(!on)); s.querySelectorAll('a, button').forEach(x => x.tabIndex = on ? 0 : -1); }); dots.forEach((d, k) => { d.classList.toggle('on', k === i); d.setAttribute('aria-current', String(k === i)); const b = d.querySelector('i'); b.replaceWith(b.cloneNode()); }); schedule(); };
+  const schedule = () => { clearTimeout(timer); if (paused || hold || reduced() || location.hash.slice(1) && location.hash !== '#home') return; timer = setTimeout(() => show(i + 1), DUR); };
+  $('#hsPrev').onclick = () => show(i - 1); $('#hsNext').onclick = () => show(i + 1);
+  dots.forEach(d => d.onclick = () => show(+d.dataset.go));
+  $('#hsPause').onclick = () => { paused = !paused; $('#hsPause').setAttribute('aria-pressed', String(paused)); $('#hsPause').setAttribute('aria-label', TR(paused ? 'Play slideshow' : 'Pause slideshow')); hero.classList.toggle('paused', paused); schedule(); };
+  const setHold = v => { hold = v; hero.classList.toggle('hold', v); if (v) clearTimeout(timer); else show(i); };
+  $('#hsStage').addEventListener('mouseenter', () => setHold(true)); $('#hsStage').addEventListener('mouseleave', () => setHold(false));
+  hero.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) setHold(true); }); hero.addEventListener('focusout', e => { if (!hero.contains(e.relatedTarget)) setHold(false); });
+  hero.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
+  let x0 = null; $('#hsStage').addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $('#hsStage').addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 45) show(i + (dx < 0 ? 1 : -1)); x0 = null; });
+  document.addEventListener('visibilitychange', () => document.hidden ? clearTimeout(timer) : schedule());
+  if (reduced()) hero.classList.add('still');
+  return { show, schedule, get i() { return i; } };
+})();
+
 /* ---------- motion ---------- */
 function swapAnim(el) { if (!el) return; el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); }
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.matches('.h3facts')) countUp(e.target); } }), { rootMargin: '0px 0px -6% 0px' }) : null;
 function observeReveals(root = document) { root.querySelectorAll('.rv:not(.in), .rv-zoom:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in')); }
 function countUp(box) { if (reduced()) return; box.querySelectorAll('[data-count]').forEach(el => { const to = +el.dataset.count, t0 = performance.now(); const step = t => { const k = Math.min(1, (t - t0) / 1200), v = Math.round(to * (1 - Math.pow(1 - k, 3))); el.textContent = v; if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }); }

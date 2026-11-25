@@ -981,6 +981,51 @@ img.real { object-fit: contain; background: #fff; }
 .ft3 .ftlogo .logo-img { height: 38px; }
 .authlogo .logo-img { height: 48px; }
 @media (max-width: 760px) { .hd .logo-img { height: 34px; } }
+
+/* ===== hero slider ===== */
+.hero4-wrap { padding-top: 48px; padding-bottom: 28px; }
+.hs-stage { display: grid; position: relative; touch-action: pan-y; }
+.hs { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: center; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility 0s .7s; }
+.hs.on { opacity: 1; visibility: visible; transition: opacity .7s ease, visibility 0s; z-index: 1; }
+.hs .h4copy h1, .hs .h4copy h2 { margin: 16px 0 18px; font: 800 clamp(36px, 4.4vw, 62px)/1.03 var(--display); letter-spacing: -0.04em; text-wrap: balance; color: var(--ink); }
+.hs .h4copy em { font-style: normal; color: var(--or); }
+.hs-a { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.hs.on .hs-a { opacity: 1; transform: none; transition-delay: calc(.12s + var(--s, 0) * .09s); }
+.hs .ph-hero img.photo { transform: scale(1.08); transition: transform 7s ease-out; }
+.hs.on .ph-hero img.photo { transform: scale(1); }
+.hs .floaters { z-index: 2; }
+.hs .ticket { z-index: 3; opacity: 0; transform: translateY(12px); transition: opacity .5s .5s, transform .6s .5s cubic-bezier(.2,.7,.2,1); }
+.hs.on .ticket { opacity: 1; transform: none; }
+.hs .pcardh { opacity: 0; transition: opacity .5s .35s; }
+.hs.on .pcardh { opacity: 1; }
+.pcardh:nth-child(1) { left: -6%; top: 8%; rotate: -5deg; } .pcardh:nth-child(2) { left: auto; right: -5%; top: -5%; rotate: 6deg; }
+.hs-bar { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); }
+.hs-bar .h3facts { margin: 0; padding: 0; border: 0; }
+.hs-ctrl { display: flex; align-items: center; gap: 10px; }
+.hs-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background .15s, border-color .15s; }
+.hs-btn:hover { border-color: var(--ink); }
+.hs-btn .i-play { display: none; } .hs-btn[aria-pressed="true"] .i-play { display: block; } .hs-btn[aria-pressed="true"] .i-pause { display: none; }
+.hs-dots { display: flex; gap: 6px; padding: 0 6px; }
+.hs-dot { position: relative; width: 28px; height: 28px; border: 0; background: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+.hs-dot i { display: block; width: 100%; height: 4px; border-radius: 4px; background: #E4DED3; overflow: hidden; position: relative; }
+.hs-dot.on { width: 56px; }
+.hs-dot.on i::after { content: ""; position: absolute; inset: 0; background: var(--or); transform-origin: left; animation: hsprog var(--dur, 6s) linear forwards; }
+.hero4.paused .hs-dot.on i::after, .hero4.hold .hs-dot.on i::after { animation-play-state: paused; }
+.hero4.still .hs-dot.on i::after { animation: none; transform: none; }
+.hero4 .marquee { margin-top: 0; }
+@keyframes hsprog { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .hs, .hs.on { transition: none; } .hs-a { opacity: 1; transform: none; } .hs .ticket, .hs .pcardh { opacity: 1; transform: none; } }
+@media (max-width: 1180px) { .hs { gap: 36px; } }
+@media (max-width: 900px) { .hs { grid-template-columns: minmax(0, 1fr); gap: 24px; } .hs .h4art { order: -1; } }
+@media (max-width: 760px) {
+  .hero4-wrap { padding-top: 20px; }
+  .hs .h4copy h1, .hs .h4copy h2 { font-size: 34px; margin: 10px 0 12px; }
+  .hs .h4copy p { font-size: 15.5px; margin-bottom: 20px; }
+  .hs-bar { margin-top: 24px; }
+  .hs-bar .h3facts { display: none; }
+  .hs-ctrl { width: 100%; justify-content: space-between; }
+  .pcardh:nth-child(1) { left: 2%; top: 4%; } .pcardh:nth-child(2) { right: 2%; top: 4%; }
+}
 </style>
 </head>
 <body>
@@ -1027,18 +1072,46 @@ img.real { object-fit: contain; background: #fff; }
 <!-- HOME -->
 <section class="route" data-route="home" hidden>
 
-<section class="hero4"><div class="wrap hero4-in">
-<div class="h4copy">
-<span class="eyebrow rv">Tropical grocer · Remich, Luxembourg</span>
-<h1 class="rv" style="--d:.06s">The flavours of home, <em>delivered</em> across Luxembourg.</h1>
-<p class="rv" style="--d:.12s">African, Caribbean and Asian groceries from our shop in Remich. Order online, we deliver every Tuesday and Thursday, and you pay at the door.</p>
-<div class="h3cta rv" style="--d:.18s"><a class="btn y lg" href="#shop" data-cat="">Start shopping <span class="arr" aria-hidden="true">→</span></a><button class="btn ghost lg" data-scroll="zoneCheck">Check your delivery zone</button></div>
-<ul class="h3facts rv" style="--d:.24s"><li><b data-count="860">860</b><b class="plus">+</b><span>products in store</span></li><li><b data-count="8">8</b><span>delivery zones</span></li><li><b>2×</b><span>deliveries a week</span></li></ul>
+<section class="hero4" id="hero" aria-roledescription="carousel" aria-label="Highlights">
+<div class="wrap hero4-wrap">
+<div class="hs-stage" id="hsStage" aria-live="off">
+<div class="hs on" role="group" aria-roledescription="slide" aria-label="1 / 5" >
+<div class="h4copy"><span class="eyebrow hs-a">Tropical grocer · Remich, Luxembourg</span><h1 class="hs-t hs-a" style="--s:1">The flavours of home, <em>delivered</em> across Luxembourg.</h1><p class="hs-a" style="--s:2">African, Caribbean and Asian groceries from our shop in Remich. Order online, we deliver every Tuesday and Thursday, and you pay at the door.</p><div class="h3cta hs-a" style="--s:3"><a class="btn y lg" href="#shop" data-cat="">Start shopping <span class="arr" aria-hidden="true">→</span></a><button class="btn ghost lg" data-scroll="zoneCheck">Check your delivery zone</button></div></div>
+<div class="h4art"><figure class="ph ph-hero"><img class="photo" src="https://images.unsplash.com/photo-1665400808116-f0e6339b7e9a?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="A table spread with West African dishes" fetchpriority="high" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="spread" aria-hidden="true"></span></figure>
+<div class="floaters" data-floats="9,24"></div>
+<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b class="t-day"></b><span class="t-cut"></span></span></div></div>
 </div>
-<div class="h4art">
-<figure class="ph ph-hero rv-zoom"><img class="photo" src="https://images.unsplash.com/photo-1665400808116-f0e6339b7e9a?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="A table spread with West African dishes" fetchpriority="high" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="spread" aria-hidden="true"></span></figure>
-<div class="floaters" id="still"></div>
-<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b id="tDay"></b><span id="tCut"></span></span></div>
+<div class="hs" role="group" aria-roledescription="slide" aria-label="2 / 5" aria-hidden="true">
+<div class="h4copy"><span class="eyebrow hs-a">African kitchen</span><h2 class="hs-t hs-a" style="--s:1">Egusi, gari and fufu, <em>just like home.</em></h2><p class="hs-a" style="--s:2">Gari from Ghana and Togo, plantain fufu, attiéké, pepper soup spice and the seasonings that make the pot.</p><div class="h3cta hs-a" style="--s:3"><a class="btn y lg" href="#shop" data-kitchen="African">Shop the African kitchen <span class="arr" aria-hidden="true">→</span></a></div></div>
+<div class="h4art"><figure class="ph ph-hero"><img class="photo" src="https://images.unsplash.com/photo-1763048443535-1243379234e2?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="A bowl of egusi soup with assorted meats" loading="lazy" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="pot" aria-hidden="true"></span></figure>
+<div class="floaters" data-floats="73,62"></div>
+<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b class="t-day"></b><span class="t-cut"></span></span></div></div>
+</div>
+<div class="hs" role="group" aria-roledescription="slide" aria-label="3 / 5" aria-hidden="true">
+<div class="h4copy"><span class="eyebrow hs-a">Caribbean kitchen</span><h2 class="hs-t hs-a" style="--s:1">Jerk season, <em>all year round.</em></h2><p class="hs-a" style="--s:2">Jerk seasoning, hot pepper sauce, pigeon peas and ice cold ginger beer for a proper Caribbean cookout.</p><div class="h3cta hs-a" style="--s:3"><a class="btn y lg" href="#shop" data-kitchen="Caribbean">Shop the Caribbean kitchen <span class="arr" aria-hidden="true">→</span></a></div></div>
+<div class="h4art"><figure class="ph ph-hero"><img class="photo" src="https://images.unsplash.com/photo-1574803636191-b2bbb307e9c6?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="Jamaican jerk chicken with rice and peas" loading="lazy" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="spread" aria-hidden="true"></span></figure>
+<div class="floaters" data-floats="2,15"></div>
+<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b class="t-day"></b><span class="t-cut"></span></span></div></div>
+</div>
+<div class="hs" role="group" aria-roledescription="slide" aria-label="4 / 5" aria-hidden="true">
+<div class="h4copy"><span class="eyebrow hs-a">Asian kitchen</span><h2 class="hs-t hs-a" style="--s:1">Basmati for every pot, <em>from 1kg to 20kg.</em></h2><p class="hs-a" style="--s:2">Daawat, Tilda, Laila and President rice, biryani mixes, dal, cumin and creamy coconut milk.</p><div class="h3cta hs-a" style="--s:3"><a class="btn y lg" href="#shop" data-kitchen="Asian">Shop the Asian kitchen <span class="arr" aria-hidden="true">→</span></a></div></div>
+<div class="h4art"><figure class="ph ph-hero"><img class="photo" src="https://images.unsplash.com/photo-1782541370275-6761522e39d1?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="Hands serving chicken biryani" loading="lazy" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="pot" aria-hidden="true"></span></figure>
+<div class="floaters" data-floats="9,65"></div>
+<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b class="t-day"></b><span class="t-cut"></span></span></div></div>
+</div>
+<div class="hs" role="group" aria-roledescription="slide" aria-label="5 / 5" aria-hidden="true">
+<div class="h4copy"><span class="eyebrow hs-a">Delivered Tuesday and Thursday</span><h2 class="hs-t hs-a" style="--s:1">Order by Monday, <em>eat well</em> by Tuesday.</h2><p class="hs-a" style="--s:2">We deliver across Luxembourg and to Perl and Sierck les Bains between 12:00 and 18:00. No card needed online, you pay at the door.</p><div class="h3cta hs-a" style="--s:3"><button class="btn y lg" data-scroll="zoneCheck">Check your delivery zone <span class="arr" aria-hidden="true">→</span></button><a class="btn ghost lg" href="#delivery">Delivery details</a></div></div>
+<div class="h4art"><figure class="ph ph-hero"><img class="photo" src="https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="A box of fresh groceries" loading="lazy" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="basket" aria-hidden="true"></span></figure>
+<div class="floaters" data-floats="28,20"></div>
+<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b class="t-day"></b><span class="t-cut"></span></span></div></div>
+</div>
+</div>
+<div class="hs-bar">
+<ul class="h3facts"><li><b data-count="860">860</b><b class="plus">+</b><span>products in store</span></li><li><b data-count="8">8</b><span>delivery zones</span></li><li><b>2×</b><span>deliveries a week</span></li></ul>
+<div class="hs-ctrl"><button class="hs-btn" id="hsPrev" aria-label="Previous slide"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+<div class="hs-dots" id="hsDots"><button class="hs-dot on" data-go="0" aria-label="Go to slide 1" aria-current="true"><i></i></button><button class="hs-dot" data-go="1" aria-label="Go to slide 2" aria-current="false"><i></i></button><button class="hs-dot" data-go="2" aria-label="Go to slide 3" aria-current="false"><i></i></button><button class="hs-dot" data-go="3" aria-label="Go to slide 4" aria-current="false"><i></i></button><button class="hs-dot" data-go="4" aria-label="Go to slide 5" aria-current="false"><i></i></button></div>
+<button class="hs-btn" id="hsNext" aria-label="Next slide"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+<button class="hs-btn" id="hsPause" aria-label="Pause slideshow" aria-pressed="false"><svg class="i-pause" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg></button></div>
 </div>
 </div>
 <div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
@@ -1671,6 +1744,33 @@ const DICT = {
 "Steep in hot water, sweeten and serve chilled over ice.": ["Faites infuser dans l'eau chaude, sucrez et servez bien frais avec des glaçons.", "In heißem Wasser ziehen lassen, süßen und gekühlt auf Eis servieren."],
 "Open cart": ["Ouvrir le panier", "Warenkorb öffnen"],
 "Remove": ["Retirer", "Entfernen"],
+"Egusi, gari and fufu,": ["Egusi, gari et fufu,", "Egusi, Gari und Fufu,"],
+"just like home.": ["comme à la maison.", "wie zu Hause."],
+"Gari from Ghana and Togo, plantain fufu, attiéké, pepper soup spice and the seasonings that make the pot.": ["Gari du Ghana et du Togo, fufu de plantain, attiéké, épices pour pepper soup et les assaisonnements qui font la marmite.", "Gari aus Ghana und Togo, Fufu aus Kochbananen, Attiéké, Pepper Soup Gewürz und die Würzmittel, die den Topf ausmachen."],
+"Shop the African kitchen": ["Découvrir la cuisine africaine", "Afrikanische Küche entdecken"],
+"Jerk season,": ["La saison du jerk,", "Jerk Saison,"],
+"all year round.": ["toute l'année.", "das ganze Jahr."],
+"Jerk seasoning, hot pepper sauce, pigeon peas and ice cold ginger beer for a proper Caribbean cookout.": ["Assaisonnement jerk, sauce piquante, pois d'Angole et ginger beer bien frais pour un vrai barbecue caribéen.", "Jerk Würzmischung, scharfe Pfeffersauce, Straucherbsen und eiskaltes Ginger Beer für ein echtes karibisches Grillfest."],
+"Shop the Caribbean kitchen": ["Découvrir la cuisine caribéenne", "Karibische Küche entdecken"],
+"Basmati for every pot,": ["Du basmati pour chaque marmite,", "Basmati für jeden Topf,"],
+"from 1kg to 20kg.": ["de 1 kg à 20 kg.", "von 1 kg bis 20 kg."],
+"Daawat, Tilda, Laila and President rice, biryani mixes, dal, cumin and creamy coconut milk.": ["Riz Daawat, Tilda, Laila et President, mélanges biryani, dal, cumin et lait de coco onctueux.", "Reis von Daawat, Tilda, Laila und President, Biryani Mischungen, Dal, Kreuzkümmel und cremige Kokosmilch."],
+"Shop the Asian kitchen": ["Découvrir la cuisine asiatique", "Asiatische Küche entdecken"],
+"Delivered Tuesday and Thursday": ["Livré le mardi et le jeudi", "Lieferung dienstags und donnerstags"],
+"Order by Monday,": ["Commandez avant lundi,", "Bis Montag bestellen,"],
+"eat well": ["régalez-vous", "gut essen"],
+"by Tuesday.": ["dès mardi.", "ab Dienstag."],
+"We deliver across Luxembourg and to Perl and Sierck les Bains between 12:00 and 18:00. No card needed online, you pay at the door.": ["Nous livrons partout au Luxembourg ainsi qu'à Perl et Sierck-les-Bains entre 12h00 et 18h00. Pas de carte en ligne, vous payez à la porte.", "Wir liefern in ganz Luxemburg sowie nach Perl und Sierck-les-Bains zwischen 12:00 und 18:00 Uhr. Keine Karte online nötig, Sie zahlen an der Tür."],
+"Delivery details": ["Détails de livraison", "Lieferdetails"],
+"Highlights": ["À la une", "Highlights"],
+"Previous slide": ["Diapositive précédente", "Vorherige Folie"], "Next slide": ["Diapositive suivante", "Nächste Folie"],
+"Pause slideshow": ["Mettre en pause", "Diashow anhalten"], "Play slideshow": ["Lancer le diaporama", "Diashow abspielen"],
+"Go to slide 1": ["Aller à la diapositive 1", "Zu Folie 1"], "Go to slide 2": ["Aller à la diapositive 2", "Zu Folie 2"], "Go to slide 3": ["Aller à la diapositive 3", "Zu Folie 3"], "Go to slide 4": ["Aller à la diapositive 4", "Zu Folie 4"], "Go to slide 5": ["Aller à la diapositive 5", "Zu Folie 5"],
+"A bowl of egusi soup with assorted meats": ["Un bol de soupe egusi aux viandes variées", "Eine Schüssel Egusi Suppe mit verschiedenem Fleisch"],
+"Jamaican jerk chicken with rice and peas": ["Poulet jerk jamaïcain, riz et pois", "Jamaikanisches Jerk Chicken mit Reis und Erbsen"],
+"Hands serving chicken biryani": ["Des mains servant un biryani au poulet", "Hände servieren Hähnchen Biryani"],
+"A box of fresh groceries": ["Un carton de produits frais", "Eine Kiste mit frischen Lebensmitteln"],
+
 "Checkout": ["Commande", "Kasse"], "Explore": ["Découvrir", "Entdecken"], "English": ["English", "English"], "Delivering to": ["Livraison à", "Lieferung nach"]
 };
 /* Templates with variables: key → [en, fr, de] */
@@ -1877,11 +1977,10 @@ const quad4 = (title, list, more, attr) => `<div class="quad"><h2>${title}</h2><
 
 /* ---------- home ---------- */
 function drawHome() {
-  const still = [[9, '-5%', '6%', -5], [24, '84%', '-4%', 6], [5, '80%', '62%', -4]];
-  $('#still').innerHTML = still.map(([id, l, t, r]) => `<a class="pcardh" href="#product" data-pid="${id}" style="left:${l};top:${t};rotate:${r}deg" aria-label="${esc(P[id].name)}">${pic(P[id], true)}<span>${esc(P[id].brand)}<b>${eur(P[id].price)}</b></span></a>`).join('');
+  $$('[data-floats]').forEach(el => { el.innerHTML = el.dataset.floats.split(',').map(id => { const q = P[+id]; return `<a class="pcardh" href="#product" data-pid="${q.id}" aria-label="${esc(q.name)}">${pic(q, true)}<span>${esc(q.brand)}<b>${eur(q.price)}</b></span></a>`; }).join(''); });
   const MQ = ['Daawat', 'Tropical Sun', 'Dudu Osun', 'Cantu', 'Old Jamaica', 'Chaokoh', 'Goya', 'Tilda', 'Encona', 'Power Malt', 'Aunt Jackie\'s', 'Shan', 'Knorr', 'Vimto', 'Africa Village', 'Creme of Nature'];
   $('#mq').innerHTML = MQ.concat(MQ).map(b => `<span>${esc(b)}</span>`).join('');
-  $('#tDay').textContent = longDay(SL[0].date); $('#tCut').textContent = cutoffText();
+  $$('.t-day').forEach(e => e.textContent = longDay(SL[0].date)); $$('.t-cut').forEach(e => e.textContent = cutoffText());
   const KC = [['African', 'af', 'Gari, fufu, attiéké, pepper soup spice, malt and black soap.', [73, 62, 20], '1763048443535-1243379234e2'], ['Caribbean', 'ca', 'Jerk seasoning, hot pepper sauce, ginger beer and pigeon peas.', [2, 5, 15], '1574803636191-b2bbb307e9c6'], ['Asian', 'as', 'Basmati and sella rice, biryani mixes, dal, cumin and coconut milk.', [9, 24, 66], '1782541370275-6761522e39d1']];
   $('#kgrid').innerHTML = KC.map(([k, c, d, im, ph], i) => { const n = P.filter(p => kitchenOf(p) === k).length; return `<a class="kcard ${c} rv" style="--d:${i * .08}s" href="#shop" data-kitchen="${k}"><span class="kph-bg"><img loading="lazy" src="https://images.unsplash.com/photo-${ph}?w=900&q=70&auto=format&fit=crop" alt="" onerror="this.closest('.kcard').classList.add('off')"></span><span class="ktag">${T('nProducts', { n })}</span><div><h3>${k} kitchen</h3><p>${d}</p></div><span class="kfoot"><span class="arrow" aria-hidden="true">→</span>Explore</span><span class="kimgs" aria-hidden="true">${im.map(i => `<span class="kph">${pic(P[i], true)}</span>`).join('')}</span></a>`; }).join('');
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
@@ -2132,14 +2231,34 @@ function route() {
   if (r === 'cart') drawCart(); if (r === 'wishlist') drawWish(); if (r === 'checkout') { syncZoneSelect(); drawCheckout(); } if (r === 'home') drawRecent(); if (r === 'shop') drawResults();
   document.title = r === 'home' ? 'Marché Tropical' : (r === 'product' ? cur.name : TR(TITLES[r])) + ' | Marché Tropical';
   scrollTo(0, 0);
-  observeReveals();
+  observeReveals(); if (r === 'home') HS.show(HS.i);
   if (r === 'home' && window.__gotoZone) { window.__gotoZone = false; setTimeout(() => $('#zoneCheck').scrollIntoView({ behavior: 'smooth' }), 120); }
 }
 addEventListener('hashchange', route);
 
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- hero slider ---------- */
+const HS = (() => {
+  const hero = $('#hero'), slides = $$('#hsStage .hs'), dots = $$('#hsDots .hs-dot'), DUR = 6500; let i = 0, timer = null, paused = false, hold = false;
+  hero.style.setProperty('--dur', DUR + 'ms');
+  const show = n => { i = (n + slides.length) % slides.length; slides.forEach((s, k) => { const on = k === i; s.classList.toggle('on', on); s.setAttribute('aria-hidden', String(!on)); s.querySelectorAll('a, button').forEach(x => x.tabIndex = on ? 0 : -1); }); dots.forEach((d, k) => { d.classList.toggle('on', k === i); d.setAttribute('aria-current', String(k === i)); const b = d.querySelector('i'); b.replaceWith(b.cloneNode()); }); schedule(); };
+  const schedule = () => { clearTimeout(timer); if (paused || hold || reduced() || location.hash.slice(1) && location.hash !== '#home') return; timer = setTimeout(() => show(i + 1), DUR); };
+  $('#hsPrev').onclick = () => show(i - 1); $('#hsNext').onclick = () => show(i + 1);
+  dots.forEach(d => d.onclick = () => show(+d.dataset.go));
+  $('#hsPause').onclick = () => { paused = !paused; $('#hsPause').setAttribute('aria-pressed', String(paused)); $('#hsPause').setAttribute('aria-label', TR(paused ? 'Play slideshow' : 'Pause slideshow')); hero.classList.toggle('paused', paused); schedule(); };
+  const setHold = v => { hold = v; hero.classList.toggle('hold', v); if (v) clearTimeout(timer); else show(i); };
+  $('#hsStage').addEventListener('mouseenter', () => setHold(true)); $('#hsStage').addEventListener('mouseleave', () => setHold(false));
+  hero.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) setHold(true); }); hero.addEventListener('focusout', e => { if (!hero.contains(e.relatedTarget)) setHold(false); });
+  hero.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
+  let x0 = null; $('#hsStage').addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $('#hsStage').addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 45) show(i + (dx < 0 ? 1 : -1)); x0 = null; });
+  document.addEventListener('visibilitychange', () => document.hidden ? clearTimeout(timer) : schedule());
+  if (reduced()) hero.classList.add('still');
+  return { show, schedule, get i() { return i; } };
+})();
+
 /* ---------- motion ---------- */
 function swapAnim(el) { if (!el) return; el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); }
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.matches('.h3facts')) countUp(e.target); } }), { rootMargin: '0px 0px -6% 0px' }) : null;
 function observeReveals(root = document) { root.querySelectorAll('.rv:not(.in), .rv-zoom:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in')); }
 function countUp(box) { if (reduced()) return; box.querySelectorAll('[data-count]').forEach(el => { const to = +el.dataset.count, t0 = performance.now(); const step = t => { const k = Math.min(1, (t - t0) / 1200), v = Math.round(to * (1 - Math.pow(1 - k, 3))); el.textContent = v; if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }); }
