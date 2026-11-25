@@ -340,3 +340,31 @@
 @media (max-width: 640px) { .cart3 { padding-top: 48px; } .cart3-in { padding: 22px 18px; border-radius: 20px; } .bc-tag { display: none; } .aislechips a { font-size: 12.5px; padding: 6px 10px; } }
 .bc-img { background: #fff; border-radius: 16px; padding: 9%; box-shadow: 0 12px 24px rgba(22,32,26,.16), 0 0 0 1px rgba(22,32,26,.05); filter: none; }
 .bc-img img, .bc-img svg { mix-blend-mode: normal; }
+
+/* ===== delivery: warehouse to door ===== */
+.deliv4 { padding-top: 80px; scroll-margin-top: 150px; }
+.d4card { border: 1px solid var(--line); border-radius: 28px; background: var(--cream); overflow: hidden; }
+.d4scene { padding: 28px 28px 0; background: linear-gradient(180deg, #FFF8EE 0%, var(--cream) 100%); }
+.dscene { display: block; width: 100%; height: auto; }
+.dtruck { animation: truckRun 9s cubic-bezier(.45,0,.35,1) infinite; }
+.dwheel { animation: spin .9s linear infinite; transform-box: fill-box; transform-origin: center; }
+.droad { animation: road 1.2s linear infinite; }
+.dpin { animation: pinPulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+g:nth-of-type(2) > .dpin { animation-delay: .8s; } g:nth-of-type(3) > .dpin { animation-delay: 1.6s; }
+.dparcel { opacity: 0; animation: parcel 9s ease infinite; }
+@keyframes truckRun { 0%, 8% { transform: translateX(0); } 52%, 66% { transform: translateX(480px); } 90% { transform: translateX(980px); opacity: 1; } 91% { opacity: 0; transform: translateX(980px); } 92% { opacity: 0; transform: translateX(-320px); } 100% { opacity: 1; transform: translateX(0); } }
+@keyframes parcel { 0%, 58% { opacity: 0; } 64%, 96% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes pinPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+.d4steps { list-style: none; margin: 0; padding: 24px 28px 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; border-bottom: 1px solid var(--line); }
+.d4steps li { display: flex; gap: 14px; align-items: flex-start; padding: 18px; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+.d4steps .n { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--or); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.d4steps b { display: block; font-size: 16px; margin-bottom: 4px; } .d4steps span:not(.n) { color: var(--ink2); font-size: 14px; line-height: 1.5; }
+.d4zone { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 12px 32px; padding: 28px; align-items: start; background: #fff; }
+.d4z-h h3 { margin: 0 0 6px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+.d4z-h p { margin: 0; }
+.d4zone .zc-row { margin: 0; grid-column: 2; }
+.d4zone .zc-out { grid-column: 2; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.d4zone .input { border-radius: 10px; border: 1px solid #CFC9BE; min-height: 48px; box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .dparcel { opacity: 1; } }
+@media (max-width: 1000px) { .d4steps { grid-template-columns: minmax(0, 1fr); } .d4zone { grid-template-columns: minmax(0, 1fr); } .d4zone .zc-row, .d4zone .zc-out { grid-column: 1; } .d4zone .zc-out { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .deliv4 { padding-top: 48px; } .d4scene { padding: 14px 10px 0; } .d4steps, .d4zone { padding: 18px; } .d4zone .zc-out { grid-template-columns: minmax(0, 1fr); } }
