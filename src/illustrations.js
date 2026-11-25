@@ -12,7 +12,7 @@ const ILLUS = {
    <rect x="0" y="86" width="298" height="18" fill="${C.gr}"/>
    <circle cx="20" cy="50" r="15" fill="${C.or}"/><circle cx="20" cy="50" r="9" fill="${C.mg}"/><circle cx="20" cy="50" r="4" fill="${C.rd}"/>
    <text x="44" y="56" font-family="Inter, Arial" font-weight="800" font-size="21" fill="${C.or}">Marché</text><text x="130" y="56" font-family="Inter, Arial" font-weight="800" font-size="21" fill="${C.gr}">Tropical</text>
-   <text x="44" y="76" font-family="Inter, Arial" font-weight="600" font-size="11" fill="${C.ink}" opacity=".6">Tue &amp; Thu · 12:00 to 18:00</text>
+   <text x="44" y="76" font-family="Inter, Arial" font-weight="600" font-size="11" fill="${C.ink}" opacity=".6">marchetropical.lu</text>
    <g class="wheel" transform="translate(60 108)"><circle r="20" fill="${C.ink}"/><circle r="8" fill="${C.sd}"/><path d="M0-8V8M-8 0H8" stroke="${C.ink}" stroke-width="2"/></g>
    <g class="wheel" transform="translate(250 108)"><circle r="20" fill="${C.ink}"/><circle r="8" fill="${C.sd}"/><path d="M0-8V8M-8 0H8" stroke="${C.ink}" stroke-width="2"/></g>
    <rect x="292" y="80" width="10" height="8" rx="2" fill="${C.mg}"/>

@@ -13,7 +13,7 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 * Search with live suggestions, results with department, price and brand filters, sorting and pages
 * Product pages with gallery, details and a buy box (delivery day, quantity, add to cart, buy now, wishlist)
 * Cart with quantity steppers, save for later and a free delivery progress bar
-* One page checkout using the real delivery rules from the terms of sale (section 7.1): eight zones with minimum orders, fees and free delivery thresholds, and Tuesday and Thursday delivery with 17:00 cutoffs
+* One page checkout with the delivery zones from the terms of sale (section 7.1): eight zones with minimum orders, fees and free delivery thresholds. Delivery Monday to Friday 20:00 to 22:00 and Saturday during the day until 20:00, orders any time
 * Wishlist, account, our store, delivery, contact and terms pages
 * English, French and German, switchable from the top bar or the menu; dates follow the chosen language
 * Custom illustrations (delivery van, basket, empty states, order confirmation) and motion: scroll reveals, a fly to cart animation, animated tabs and page transitions, all switched off for visitors who prefer reduced motion
@@ -33,6 +33,7 @@ build.py          rebuilds index.html from src/ and data/
 src/              base.css, theme.css, motion.css, body.html, app.js, i18n.js (EN, FR, DE), recipes.js, illustrations.js, packshot.js
 data/             products.json, images.json (embedded product photos), logo.json
 assets/logo.png   the Marché Tropical logo
+media/            the shop's own buffet photo and videos (sound removed, lightly denoised)
 ```
 
 After editing anything in `src/` or `data/`, run `python3 build.py`.

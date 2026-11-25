@@ -60,16 +60,23 @@ const subtotal = () => ids().reduce((a, k) => a + byId(k).price * cart[k], 0);
 const persist = () => { store.set('mt3-cart', cart); store.set('mt3-saved', saved); store.set('mt3-wish', wish); };
 
 /* ---------- delivery days ---------- */
+/* Delivery: Monday to Friday 20:00 to 22:00, Saturday during the day until 20:00, no Sunday. Orders any time; same day if placed before the slot (Saturday: before 12:00). */
 function slots(n) {
   const out = [], now = new Date(), d = new Date(now); d.setHours(0, 0, 0, 0);
-  for (let i = 0; out.length < n && i < 40; i++) { const day = new Date(d); day.setDate(d.getDate() + i); if (day.getDay() !== 2 && day.getDay() !== 4) continue; const c = new Date(day); c.setDate(day.getDate() - 1); c.setHours(17, 0, 0, 0); if (now < c) out.push({ date: day, cutoff: c }); }
+  for (let i = 0; out.length < n && i < 21; i++) {
+    const day = new Date(d); day.setDate(d.getDate() + i); const dow = day.getDay(); if (dow === 0) continue;
+    const last = new Date(day); last.setHours(dow === 6 ? 12 : 20, 0, 0, 0);
+    if (now < last) out.push({ date: day, sat: dow === 6, today: i === 0 });
+  }
   return out;
 }
-const SL = slots(4);
+const win = s => s.sat ? T('winSat') : T('winEve');
+const SL = slots(6);
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const shortDay = d => cap(d.toLocaleDateString(LOCALE[LANG], { weekday: 'short', day: 'numeric', month: 'short' }));
 const longDay = d => cap(d.toLocaleDateString(LOCALE[LANG], { weekday: 'long', day: 'numeric', month: 'long' }));
-function cutoffText() { const c = SL[0].cutoff, now = new Date(); const h = Math.floor((c - now) / 36e5); return h < 48 ? T('withinH', { h, m: Math.floor(((c - now) % 36e5) / 6e4) }) : T('byDay', { day: c.toLocaleDateString(LOCALE[LANG], { weekday: 'long' }) }); }
+function cutoffText() { return `${win(SL[0])} · ${TR('Order anytime')}`; }
+const dayLabel = sl => sl.today ? TR('Today') : longDay(sl.date);
 
 /* ---------- tiles ---------- */
 function ctl(id) { const n = cart[id]; return n ? `<span class="stp" role="group" aria-label="Quantity in cart"><button data-dec="${id}" aria-label="Remove one">−</button><span>${n}</span><button data-inc="${id}" aria-label="Add one">+</button></span>` : `<button class="add" data-add="${id}" aria-label="${esc(T('addAria', { name: byId(id).name }))}"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add</button>`; }
@@ -88,7 +95,7 @@ function drawHome() {
   $$('[data-floats]').forEach(el => { el.innerHTML = el.dataset.floats.split(',').map(id => { const q = P[+id]; return `<a class="pcardh" href="#product" data-pid="${q.id}" aria-label="${esc(q.name)}">${pic(q, true)}<span>${esc(q.brand)}<b>${eur(q.price)}</b></span></a>`; }).join(''); });
   const MQ = ['Daawat', 'Tropical Sun', 'Dudu Osun', 'Cantu', 'Old Jamaica', 'Chaokoh', 'Goya', 'Tilda', 'Encona', 'Power Malt', 'Aunt Jackie\'s', 'Shan', 'Knorr', 'Vimto', 'Africa Village', 'Creme of Nature'];
   $('#mq').innerHTML = MQ.concat(MQ).map(b => `<span>${esc(b)}</span>`).join('');
-  $$('.t-day').forEach(e => e.textContent = longDay(SL[0].date)); $$('.t-cut').forEach(e => e.textContent = cutoffText());
+  $$('.t-day').forEach(e => e.textContent = dayLabel(SL[0])); $$('.t-cut').forEach(e => e.textContent = cutoffText());
   drawRecipesHome();
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
   const cc = {}; P.forEach(p => cc[p.cat] = (cc[p.cat] || 0) + 1);
@@ -100,7 +107,7 @@ function drawHome() {
   $('#mosaic').innerHTML = [9, 24, 5, 72, 2, 15, 43, 74].map(i => `<span>${pic(P[i])}</span>`).join('');
   $('#zoneRows').innerHTML = ZONES.map(z => `<tr><td><span class="zone ${/[AB]/.test(z.id) ? 'out' : ''}">${z.name}</span></td><td>${esc(z.area)}</td><td>${eur(z.min)}</td><td>${eur(z.fee)}</td><td><b>${eur(z.free)}</b></td></tr>`).join('');
   const di = (new Date().getDay() + 6) % 7; $$('.hours tbody').forEach(tb => tb.rows[di] && tb.rows[di].classList.add('today'));
-  const H = ['Closed today', '14:00 to 19:00', '14:00 to 19:00', '09:00 to 19:00', '09:00 to 19:00', '09:00 to 19:00', '11:00 to 19:00'][new Date().getDay()];
+  const H = ['Closed today', '14:00 to 19:00', '14:00 to 19:00', '10:00 to 19:00', '10:00 to 19:00', '10:00 to 19:00', '10:00 to 19:00'][new Date().getDay()];
   $('#openToday').textContent = H.startsWith('Closed') ? T('closedToday') : T('openToday', { h: TR(H) });
 }
 const PICKS = { staples: [9, 63, 73, 72, 71, 58, 54, 10, 11, 67], spice: [2, 78, 62, 29, 1, 4, 27, 66, 61, 60, 75], drinks: [20, 14, 15, 8, 28, 22, 19, 16, 18, 23], under2: null };
@@ -196,12 +203,12 @@ function drawProduct() {
   $('#pdPrice').innerHTML = price(p.price, true); $('#bbPrice').innerHTML = price(p.price, true);
   const k = kg(p); $('#pdUnit').textContent = k ? T('perKg', { x: eur(p.price / k) }) : '';
   const size = (p.name.match(/\b(\d+(?:[.,]\d+)?\s?(?:kg|g|ml|L|oz|cl))\b/i) || [])[1];
-  $('#pdSpec').innerHTML = [['Brand', p.brand], ['Department', p.cat], size && ['Size', size], ['Delivery', 'Tuesday and Thursday'], ['Payment', 'On delivery']].filter(Boolean).map(([a, b]) => `<tr><th>${a}</th><td>${esc(b)}</td></tr>`).join('');
+  $('#pdSpec').innerHTML = [['Brand', p.brand], ['Department', p.cat], size && ['Size', size], ['Delivery', 'Monday to Saturday'], ['Payment', 'On delivery']].filter(Boolean).map(([a, b]) => `<tr><th>${a}</th><td>${esc(b)}</td></tr>`).join('');
   $('#pdAbout').innerHTML = (p.id === 7 ? ['Dried hibiscus flowers for bissap, known as sorrel in the Caribbean.', 'Steep in hot water, sweeten and serve chilled over ice.'] : ABOUT[p.cat] || []).map(t => `<li>${esc(t)}</li>`).join('');
   $('#pdStage').className = 'pd-stage'; $('#pdStage').innerHTML = pic(p, true);
   $('#thumbs').innerHTML = ['', 'v2'].map((v, i) => `<button type="button" data-view="${v}" aria-current="${i === 0}" aria-label="Image ${i + 1}">${pic(p, true)}</button>`).join('');
   $('#pdQty').innerHTML = Array.from({ length: 10 }, (_, i) => `<option>${i + 1}</option>`).join('');
-  $('#bbDay').textContent = longDay(SL[0].date);
+  $('#bbDay').textContent = dayLabel(SL[0]); $('#bbWin').textContent = win(SL[0]) + '.';
   const z = area ? zoneOf(area[1]) : zoneOf('1'); $('#bbFee').textContent = T(area ? 'freeOver' : 'freeOverRemich', { x: eur(z.free) });
   setWishBtn();
   const rel = P.filter(x => x.cat === p.cat && x.id !== p.id); $('#related').innerHTML = rel.map(x => tile(x)).join(''); $('#relH').textContent = T('moreIn', { cat: TR(p.cat) });
@@ -302,7 +309,7 @@ let slot = 0;
 function fees() { const s = subtotal(), z = zoneNow(); if (!z) return { s, z, fee: null, total: s, below: false }; const fee = s >= z.free ? 0 : z.fee; return { s, z, fee, total: s + fee, below: s < z.min }; }
 function drawCheckout() {
   const I = ids(), f = fees(); $('#coH').textContent = T('checkout', { n: T(count() === 1 ? 'nItem' : 'nItems', { n: count() }) });
-  $('#slots').innerHTML = SL.map((s, i) => `<button type="button" class="slot" data-slot="${i}" aria-pressed="${i === slot}"><b>${s.date.toLocaleDateString('en-GB', { weekday: 'long' })}</b><span>${s.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</span><small>12:00 to 18:00</small></button>`).join('');
+  $('#slots').innerHTML = SL.map((s, i) => `<button type="button" class="slot" data-slot="${i}" aria-pressed="${i === slot}"><b>${s.today ? TR('Today') : cap(s.date.toLocaleDateString(LOCALE[LANG], { weekday: 'long' }))}</b><span>${s.date.toLocaleDateString(LOCALE[LANG], { day: 'numeric', month: 'long' })}</span><small>${esc(win(s))}</small></button>`).join('');
   $('#coLines').innerHTML = I.map(id => { const p = byId(id); return `<div class="co-line"><span class="im">${pic(p)}</span><span>${esc(p.name)}<br><span class="small muted">${T('qty', { n: cart[id] })}</span></span><b>${eur(p.price * cart[id])}</b></div>`; }).join('');
   $('#coSum').innerHTML = `<button class="btn y full" id="place" style="margin:0">Place your order</button><label class="check"><input type="checkbox" id="agree"><span>I accept the <a href="#terms">terms of sale</a>.</span></label><p class="err" id="err3" role="alert" hidden></p><hr style="border:0;border-top:1px solid var(--line)"><b style="font-size:17px">Order summary</b>
   <div class="srow"><span>${T('itemsN', { n: count() })}</span><span>${eur(f.s)}</span></div><div class="srow"><span>${f.z ? T('deliveryZ', { zone: f.z.name }) : T('delivery0')}</span><span>${f.z ? (f.fee ? eur(f.fee) : 'FREE') : 'Choose area'}</span></div>
@@ -320,7 +327,7 @@ function place() {
   if (!$('#agree').checked) { e3.hidden = false; e3.textContent = 'Please accept the terms of sale.'; $('#agree').focus(); return; }
   FIELDS.forEach(k => co[k] = $('#' + k).value); store.set('mt3-co', co);
   $('#oName').textContent = co.fn; $('#oRef').textContent = '#MT' + String(Date.now()).slice(-7);
-  $('#oBody').innerHTML = `<div class="rvw"><div><h4>Delivery</h4>${longDay(SL[slot].date)}<br>${TR('12:00 to 18:00')}</div><div><h4>Address</h4>${esc(co.ad)}<br>${esc(co.pc)} ${esc(co.ci)}</div><div><h4>Pay on delivery</h4><b style="font-size:20px">${eur(f.total)}</b><br>${esc(f.fee ? T('orderItems', { n: count(), x: eur(f.fee) }) : T('orderItemsFree', { n: count() }))}</div></div>`;
+  $('#oBody').innerHTML = `<div class="rvw"><div><h4>Delivery</h4>${longDay(SL[slot].date)}<br>${esc(win(SL[slot]))}</div><div><h4>Address</h4>${esc(co.ad)}<br>${esc(co.pc)} ${esc(co.ci)}</div><div><h4>Pay on delivery</h4><b style="font-size:20px">${eur(f.total)}</b><br>${esc(f.fee ? T('orderItems', { n: count(), x: eur(f.fee) }) : T('orderItemsFree', { n: count() }))}</div></div>`;
   cart = {}; persist(); updCart(); location.hash = 'order';
 }
 
@@ -396,6 +403,10 @@ const HS = (() => {
   document.addEventListener('visibilitychange', () => document.hidden ? clearTimeout(timer) : schedule());
   return { show, schedule, get i() { return i; } };
 })();
+
+/* ---------- videos: play only when visible ---------- */
+const vio = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting && !reduced()) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause(); }), { threshold: .25 }) : null;
+$$('.reel video').forEach(v => { v.muted = true; if (vio) vio.observe(v); v.addEventListener('click', () => v.paused ? v.play() : v.pause()); });
 
 /* ---------- motion ---------- */
 function swapAnim(el) { if (!el) return; el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); }
