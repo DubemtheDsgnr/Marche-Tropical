@@ -246,3 +246,7 @@
   .hs-ctrl { width: 100%; justify-content: space-between; }
   .pcardh:nth-child(1) { left: 2%; top: 4%; } .pcardh:nth-child(2) { right: 2%; top: 4%; }
 }
+/* logo, smaller still */
+.hd .logo-img { height: 34px; }
+.hd-in { min-height: 64px; }
+@media (max-width: 760px) { .hd .logo-img { height: 28px; } }
