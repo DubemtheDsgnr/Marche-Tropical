@@ -1,6 +1,6 @@
 <div class="util"><div class="wrap util-in">
 <span class="util-l"><span class="dot"></span>Delivery every <b>Tuesday &amp; Thursday</b><span class="sep">·</span>Pay on delivery<span class="sep hide-s">·</span><span class="hide-s">Free delivery in Remich from 25 €</span></span>
-<span class="util-r"><span id="openToday"></span><span class="sep">·</span><a href="#contact">Help</a><span class="sep">·</span><span class="lang"><b>EN</b> / FR</span></span>
+<span class="util-r"><span id="openToday"></span><span class="sep">·</span><a href="#contact">Help</a><span class="sep">·</span><span class="langsw" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="fr" aria-pressed="false">FR</button><button type="button" data-lang="de" aria-pressed="false">DE</button></span></span>
 </div></div>
 <header class="hd" id="top">
 <div class="wrap hd-in">
@@ -33,7 +33,7 @@
 <div class="side-bg" id="sideBg" hidden></div>
 <aside class="side-nav" id="side" hidden aria-label="All categories">
 <div class="side-hd"><span class="avatar" aria-hidden="true"></span><b>Hello, sign in</b><button class="xbtn" id="sideClose" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-<div class="side-body"><h3>Shop by department</h3><div id="sideCats"></div><h3>Deals</h3><a href="#shop" data-deal="under2">Under 2 €</a><a href="#shop" data-deal="bulk">Bulk buys</a><h3>Help and settings</h3><a href="#account">Your account</a><a href="#delivery">Delivery zones and fees</a><a href="#about">Our store in Remich</a><a href="#contact">Customer service</a><a href="#terms">Terms of sale</a></div>
+<div class="side-body"><h3>Language</h3><div class="side-lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="fr" aria-pressed="false">Français</button><button type="button" data-lang="de" aria-pressed="false">Deutsch</button></div><h3>Shop by department</h3><div id="sideCats"></div><h3>Deals</h3><a href="#shop" data-deal="under2">Under 2 €</a><a href="#shop" data-deal="bulk">Bulk buys</a><h3>Help and settings</h3><a href="#account">Your account</a><a href="#delivery">Delivery zones and fees</a><a href="#about">Our store in Remich</a><a href="#contact">Customer service</a><a href="#terms">Terms of sale</a></div>
 </aside>
 
 <main id="main">
@@ -41,50 +41,57 @@
 <!-- HOME -->
 <section class="route" data-route="home" hidden>
 
-<section class="hero3"><div class="wrap hero3-in">
-<div class="h3copy">
-<span class="eyebrow">Tropical grocer · Remich, Luxembourg</span>
-<h1>Groceries from Africa, the Caribbean and Asia, <em>delivered</em> across Luxembourg.</h1>
-<p>From gari and egusi to jerk seasoning and basmati, we stock the brands you grew up with. Order online, we deliver on Tuesday and Thursday, and you pay at the door.</p>
-<div class="h3cta"><a class="btn y lg" href="#shop" data-cat="">Start shopping</a><button class="btn ghost lg" data-scroll="zoneCheck">Check your delivery zone</button></div>
-<ul class="h3facts"><li><b>860+</b><span>products in store</span></li><li><b>8</b><span>delivery zones</span></li><li><b>0 €</b><span>delivery in Remich from 25 €</span></li></ul>
+<section class="hero4"><div class="wrap hero4-in">
+<div class="h4copy">
+<span class="eyebrow rv">Tropical grocer · Remich, Luxembourg</span>
+<h1 class="rv" style="--d:.06s">The flavours of home, <em>delivered</em> across Luxembourg.</h1>
+<p class="rv" style="--d:.12s">African, Caribbean and Asian groceries from our shop in Remich. Order online, we deliver every Tuesday and Thursday, and you pay at the door.</p>
+<div class="h3cta rv" style="--d:.18s"><a class="btn y lg" href="#shop" data-cat="">Start shopping <span class="arr" aria-hidden="true">→</span></a><button class="btn ghost lg" data-scroll="zoneCheck">Check your delivery zone</button></div>
+<ul class="h3facts rv" style="--d:.24s"><li><b data-count="860">860</b><b class="plus">+</b><span>products in store</span></li><li><b data-count="8">8</b><span>delivery zones</span></li><li><b>2×</b><span>deliveries a week</span></li></ul>
 </div>
-<div class="h3art" aria-hidden="true">
-<div class="sun"></div>
-<svg class="leaf l1" viewBox="0 0 120 200"><path d="M60 196C20 150 4 96 22 46 32 18 50 6 60 2c10 4 28 16 38 44 18 50 2 104-38 150z" fill="#0F6D1E"/><path d="M60 190V10" stroke="#0A4614" stroke-width="3"/><path d="M60 60l-22-18M60 90l-28-20M60 120l-28-18M60 60l22-18M60 90l28-20M60 120l28-18" stroke="#0A4614" stroke-width="2" fill="none"/></svg>
-<svg class="leaf l2" viewBox="0 0 120 200"><path d="M60 196C20 150 4 96 22 46 32 18 50 6 60 2c10 4 28 16 38 44 18 50 2 104-38 150z" fill="#2E8B3E"/><path d="M60 190V10" stroke="#0F6D1E" stroke-width="3"/></svg>
-<div class="still" id="still"></div>
-<div class="ticket"><span class="t-k">Next delivery</span><b id="tDay"></b><span id="tCut"></span></div>
+<div class="h4art">
+<figure class="ph ph-hero rv-zoom"><img class="photo" src="https://images.unsplash.com/photo-1665400808116-f0e6339b7e9a?w=1400&amp;q=75&amp;auto=format&amp;fit=crop" alt="A table spread with West African dishes" fetchpriority="high" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="spread" aria-hidden="true"></span></figure>
+<div class="floaters" id="still"></div>
+<div class="ticket"><span class="t-ic" data-illus="vanmini" aria-hidden="true"></span><span><span class="t-k">Next delivery</span><b id="tDay"></b><span id="tCut"></span></span></div>
 </div>
-</div></section>
+</div>
+<div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
+</section>
 
 <section class="kitchens wrap" aria-label="Shop by kitchen">
-<div class="sec-h"><div><span class="eyebrow">Shop by kitchen</span><h2>Cook the way you do at home</h2></div></div>
+<div class="sec-h rv"><div><span class="eyebrow">Shop by kitchen</span><h2>Cook the way you do at home</h2></div><p class="sec-sub">Three pantries under one roof. Pick the kitchen you cook from and we'll show you the essentials.</p></div>
 <div class="kgrid" id="kgrid"></div>
 </section>
 
 <section class="wrap aisles3" aria-label="Aisles">
-<div class="sec-h"><div><span class="eyebrow">Browse the aisles</span><h2>Everything on our shelves</h2></div><a class="more-l" href="#shop" data-cat="">View all products →</a></div>
+<div class="sec-h rv"><div><span class="eyebrow">Browse the aisles</span><h2>Everything on our shelves</h2></div><a class="more-l" href="#shop" data-cat="">View all products <span aria-hidden="true">→</span></a></div>
 <div class="aislerow" id="aislerow"></div>
 </section>
 
 <section class="wrap picks" aria-label="Popular products">
-<div class="sec-h"><div><span class="eyebrow">This week</span><h2>Popular in the shop</h2></div>
+<div class="sec-h rv"><div><span class="eyebrow">This week</span><h2>Popular in the shop</h2></div>
 <div class="tabs" role="tablist" id="pickTabs"><button role="tab" data-tab="staples" aria-selected="true">Pantry staples</button><button role="tab" data-tab="spice" aria-selected="false">Spice rack</button><button role="tab" data-tab="drinks" aria-selected="false">Cold drinks</button><button role="tab" data-tab="under2" aria-selected="false">Under 2 €</button></div></div>
 <div class="prow" id="pickRow" role="tabpanel"></div>
 </section>
 
-<section class="wrap bulkband"><div class="bulk-in">
-<div class="bulk-copy"><span class="eyebrow light">Bulk buys</span><h2>Feeding a big family or planning a party?</h2><p>Rice by the sack works out cheaper per kilo. Delivery is free once your order passes your zone's threshold.</p><a class="btn y" href="#shop" data-deal="bulk">Shop bulk rice</a></div>
-<div class="bulk-list" id="bulkList"></div>
+<section class="wrap spiceband rv"><div class="sp-in">
+<figure class="ph ph-spice"><img class="photo" loading="lazy" src="https://images.unsplash.com/photo-1769628702933-39ba968cb198?w=1200&amp;q=70&amp;auto=format&amp;fit=crop" alt="Piles of colourful ground spices at a market" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="spices" aria-hidden="true"></span></figure>
+<div class="sp-copy"><span class="eyebrow light">The spice rack</span><h2>Pepper soup, jerk, curry, biryani. The blends you cook with.</h2><p>Whole and ground spices, seasoning cubes and ready made mixes from Africa, the Caribbean and South Asia.</p><a class="btn y" href="#shop" data-cat="Spices & Seasoning">Shop spices <span class="arr" aria-hidden="true">→</span></a></div>
+</div></section>
+
+<section class="wrap bulkband"><div class="bulk-in rv">
+<figure class="ph ph-bulk"><img class="photo" loading="lazy" src="https://images.unsplash.com/photo-1665332195309-9d75071138f0?w=1000&amp;q=70&amp;auto=format&amp;fit=crop" alt="Jollof rice with grilled fish" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="pot" aria-hidden="true"></span></figure>
+<div class="bulk-copy"><span class="eyebrow light">Bulk buys</span><h2>Cooking for a crowd?</h2><p>Rice by the sack works out cheaper per kilo, and delivery is free once your order passes your zone's threshold.</p>
+<div class="bulk-list" id="bulkList"></div></div>
 </div></section>
 
 <section class="wrap delivery3" id="zoneCheck">
-<div class="d3-steps">
+<div class="d3-steps rv">
 <span class="eyebrow">How delivery works</span><h2>Order today, eat well this week</h2>
+<div class="vanroad" data-illus="van" aria-hidden="true"></div>
 <ol class="steps3"><li><b>Fill your cart</b><span>Order by Monday 17:00 for Tuesday, or by Wednesday 17:00 for Thursday.</span></li><li><b>We pack and deliver</b><span>Between 12:00 and 18:00, up to the 2nd floor in buildings without a lift.</span></li><li><b>Pay at the door</b><span>No card needed online. Pay the driver when your order arrives.</span></li></ol>
 </div>
-<div class="zcheck card">
+<div class="zcheck rv" style="--d:.1s">
 <h3>Check your delivery zone</h3>
 <p class="muted small">Enter a postcode or pick your area to see your fee and minimum order.</p>
 <div class="zc-row"><label class="sr" for="zcPc">Postcode</label><input class="input" id="zcPc" inputmode="numeric" placeholder="Postcode, e.g. 5532"><label class="sr" for="zcArea">Area</label><select class="input" id="zcArea"></select></div>
@@ -94,12 +101,14 @@
 
 <section class="wrap recent3" id="recentWrap" hidden><div class="sec-h"><div><span class="eyebrow">Pick up where you left off</span><h2>Recently viewed</h2></div><button class="lnk" id="clearRecent">Clear history</button></div><div class="prow" id="rowRecent"></div></section>
 
-<section class="wrap visit3"><div class="visit-in">
-<div><span class="eyebrow light">Visit the shop</span><h2>39 Rue Enz, Remich</h2><p>Come in to browse fresh produce, frozen fish and meat, and everything that doesn't fit on a website.</p><div class="btnrow"><a class="btn y" href="https://www.google.com/maps/search/?api=1&amp;query=39+Rue+Enz+5532+Remich" target="_blank" rel="noopener">Get directions</a><a class="btn ghost light" href="#about">Opening hours</a></div></div>
+<section class="wrap visit3"><div class="visit-in rv">
+<figure class="ph ph-visit"><img class="photo" loading="lazy" src="https://images.unsplash.com/photo-1585540083814-ea6ee8af9e4f?w=1000&amp;q=70&amp;auto=format&amp;fit=crop" alt="A market trader beside his fruit stand" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="stall" aria-hidden="true"></span></figure>
+<div class="visit-copy"><span class="eyebrow light">Visit the shop</span><h2>39 Rue Enz, Remich</h2><p>Come in for fresh produce, frozen fish and meat, and everything that doesn't fit on a website.</p>
 <table class="hours light"><tbody><tr><th>Monday</th><td>14:00 to 19:00</td></tr><tr><th>Tuesday</th><td>14:00 to 19:00</td></tr><tr><th>Wednesday</th><td>09:00 to 19:00</td></tr><tr><th>Thursday</th><td>09:00 to 19:00</td></tr><tr><th>Friday</th><td>09:00 to 19:00</td></tr><tr><th>Saturday</th><td>11:00 to 19:00</td></tr><tr class="off"><th>Sunday</th><td>Closed</td></tr></tbody></table>
+<div class="btnrow"><a class="btn y" href="https://www.google.com/maps/search/?api=1&amp;query=39+Rue+Enz+5532+Remich" target="_blank" rel="noopener">Get directions</a><a class="btn ghost light" href="#about">About the shop</a></div></div>
 </div></section>
 
-<section class="wrap news3"><div><h2>New on the shelves, first.</h2><p class="muted">Restocks and new arrivals, straight to your inbox.</p></div><form class="news-form" data-demo="Thanks! You're on the list for this demo."><label class="sr" for="nEm">Email address</label><input class="input" id="nEm" type="email" placeholder="you@example.com"><button class="btn y" type="submit">Subscribe</button></form></section>
+<section class="wrap news3 rv"><div class="news-ill" data-illus="basket" aria-hidden="true"></div><div><h2>New on the shelves, first.</h2><p class="muted">Restocks and new arrivals, straight to your inbox.</p></div><form class="news-form" data-demo="Thanks! You're on the list for this demo."><label class="sr" for="nEm">Email address</label><input class="input" id="nEm" type="email" placeholder="you@example.com"><button class="btn y" type="submit">Subscribe</button></form></section>
 </section>
 
 <!-- RESULTS -->
@@ -165,7 +174,7 @@
 
 <!-- CHECKOUT -->
 <section class="route" data-route="checkout" hidden><div class="wrap cowrap">
-<h1 class="coh">Checkout (<span id="coItems"></span>)</h1>
+<h1 class="coh" id="coH"></h1>
 <div class="checkout">
 <div class="co-main">
 <section class="co-sec card" id="sec1"><h2><span>1</span> Delivery address</h2><div class="co-body">
@@ -189,7 +198,7 @@
 
 <!-- ORDER -->
 <section class="route" data-route="order" hidden><div class="wrap">
-<div class="card confirm"><div class="okmark" aria-hidden="true">✓</div><div><h1>Order placed, thank you <span id="oName"></span>!</h1><p>This is a demo, so nothing was sent to the shop. On the live store, confirmation of order <b id="oRef"></b> would arrive by email.</p><div id="oBody"></div><div class="btnrow"><a class="btn y" href="#shop">Continue shopping</a><a class="btn w" href="#home">Back to home</a></div></div></div>
+<div class="confirm4 rv"><div class="c-ill" data-illus="done" aria-hidden="true"></div><span class="eyebrow">Order placed</span><h1>Thank you, <span id="oName"></span>!</h1><p class="lead">This is a demo, so nothing was sent to the shop. On the live store, order <b id="oRef"></b> would be confirmed by email.</p><div id="oBody"></div><div class="btnrow" style="justify-content:center"><a class="btn y" href="#shop" data-cat="">Continue shopping</a><a class="btn ghost" href="#home">Back to home</a></div></div>
 </div></section>
 
 <!-- WISHLIST -->
@@ -203,18 +212,35 @@
 </div></section>
 
 <!-- ABOUT -->
-<section class="route" data-route="about" hidden><div class="wrap">
-<div class="card page"><h1>Our store in Remich</h1><p class="lead">Our shop stocks African, Asian and Caribbean products alongside quality local and European goods. Come in and find ingredients from every corner of the tropics.</p>
-<div class="two"><div><h2>Opening hours</h2><table class="hours"><tbody><tr><th>Monday</th><td>14:00 to 19:00</td></tr><tr><th>Tuesday</th><td>14:00 to 19:00</td></tr><tr><th>Wednesday</th><td>09:00 to 19:00</td></tr><tr><th>Thursday</th><td>09:00 to 19:00</td></tr><tr><th>Friday</th><td>09:00 to 19:00</td></tr><tr><th>Saturday</th><td>11:00 to 19:00</td></tr><tr class="off"><th>Sunday</th><td>Closed</td></tr></tbody></table></div>
-<div><h2>Find us</h2><p>39 Rue Enz<br>5532 Remich, Luxembourg</p><p>+352 621 751 400<br>info@marchetropical.lu</p><a class="btn y" href="https://www.google.com/maps/search/?api=1&amp;query=39+Rue+Enz+5532+Remich" target="_blank" rel="noopener">Get directions</a><div class="mosaic" id="mosaic"></div></div></div></div>
-</div></section>
+<section class="route" data-route="about" hidden>
+<section class="pagehero ph-about"><div class="wrap pagehero-in"><div class="rv"><span class="eyebrow">Our store</span><h1>A tropical market, in the heart of Remich.</h1><p class="lead">Our shop stocks African, Asian and Caribbean products alongside quality local and European goods. Whether you're cooking egusi, jerk chicken or biryani, you'll find the ingredients here.</p></div>
+<figure class="ph ph-about rv-zoom"><img class="photo" loading="lazy" src="https://images.unsplash.com/photo-1585540083814-ea6ee8af9e4f?w=1100&amp;q=72&amp;auto=format&amp;fit=crop" alt="A market trader beside his fruit stand" onerror="this.parentNode.classList.add('off')"><span class="ph-fb" data-illus="stall" aria-hidden="true"></span></figure></div></section>
+<div class="wrap">
+<div class="values">
+<div class="val rv"><span class="vi" data-illus="basket" aria-hidden="true"></span><h3>Brands you know</h3><p>The labels you grew up with, from Daawat and Tropical Sun to Dudu Osun and Cantu.</p></div>
+<div class="val rv" style="--d:.08s"><span class="vi" data-illus="vanmini" aria-hidden="true"></span><h3>Delivered twice a week</h3><p>Every Tuesday and Thursday, across Luxembourg and to Perl and Sierck les Bains.</p></div>
+<div class="val rv" style="--d:.16s"><span class="vi" data-illus="heart" aria-hidden="true"></span><h3>A shop, not a warehouse</h3><p>Come in, ask questions and discover fresh produce, frozen fish and meat.</p></div>
+</div>
+<div class="visitgrid">
+<div class="card page rv"><h2>Opening hours</h2><table class="hours"><tbody><tr><th>Monday</th><td>14:00 to 19:00</td></tr><tr><th>Tuesday</th><td>14:00 to 19:00</td></tr><tr><th>Wednesday</th><td>09:00 to 19:00</td></tr><tr><th>Thursday</th><td>09:00 to 19:00</td></tr><tr><th>Friday</th><td>09:00 to 19:00</td></tr><tr><th>Saturday</th><td>11:00 to 19:00</td></tr><tr class="off"><th>Sunday</th><td>Closed</td></tr></tbody></table></div>
+<div class="card page rv" style="--d:.08s"><h2>Find us</h2><p>39 Rue Enz<br>5532 Remich, Luxembourg</p><p>+352 621 751 400<br>info@marchetropical.lu</p><a class="btn y" href="https://www.google.com/maps/search/?api=1&amp;query=39+Rue+Enz+5532+Remich" target="_blank" rel="noopener">Get directions</a><div class="mosaic" id="mosaic"></div></div>
+</div></div>
+</section>
 
 <!-- DELIVERY -->
-<section class="route" data-route="delivery" hidden><div class="wrap">
-<div class="card page"><h1>Delivery zones and fees</h1><p class="lead">We deliver on Tuesdays and Thursdays between 12:00 and 18:00. Order by Monday 17:00 for Tuesday and by Wednesday 17:00 for Thursday. You pay on delivery.</p>
-<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Zone</th><th>Area</th><th>Minimum order</th><th>Fee</th><th>Free from</th></tr></thead><tbody id="zoneRows"></tbody></table></div>
-<ul class="bul"><li>Delivery is guaranteed up to the 2nd floor in buildings without a lift.</li><li>Tell us at least 5 hours ahead if you cannot receive your order. If you are out, it may be left at your door or with a neighbour.</li><li>Fees from the terms of sale, section 7.1.</li></ul></div>
-</div></section>
+<section class="route" data-route="delivery" hidden>
+<section class="pagehero"><div class="wrap pagehero-in"><div class="rv"><span class="eyebrow">Delivery</span><h1>To your door, every Tuesday and Thursday.</h1><p class="lead">We deliver between 12:00 and 18:00. Order by Monday 17:00 for Tuesday and by Wednesday 17:00 for Thursday. You pay on delivery.</p><a class="btn y" href="#home" data-goto-zone>Check your zone</a></div>
+<div class="vanroad big rv" data-illus="van" aria-hidden="true"></div></div></section>
+<div class="wrap">
+<div class="card page rv"><h2>Zones and fees</h2><p class="muted small">From the terms of sale, section 7.1.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Zone</th><th>Area</th><th>Minimum order</th><th>Fee</th><th>Free from</th></tr></thead><tbody id="zoneRows"></tbody></table></div></div>
+<div class="faq rv">
+<details open><summary>What if I'm not home?</summary><p>Tell us at least 5 hours ahead if you cannot receive your order. If you are out, it may be left at your door or with a neighbour.</p></details>
+<details><summary>Do you carry orders upstairs?</summary><p>Delivery is guaranteed up to the 2nd floor in buildings without a lift.</p></details>
+<details><summary>How do I pay?</summary><p>You pay the driver when your order arrives. No card is needed online.</p></details>
+<details><summary>Something arrived damaged?</summary><p>For fresh and frozen products, email us photos on the day of delivery or the next day before midnight.</p></details>
+</div></div>
+</section>
 
 <!-- CONTACT -->
 <section class="route" data-route="contact" hidden><div class="wrap">

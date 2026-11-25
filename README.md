@@ -14,7 +14,9 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 * Cart with quantity steppers, save for later and a free delivery progress bar
 * One page checkout using the real delivery rules from the terms of sale (section 7.1): eight zones with minimum orders, fees and free delivery thresholds, and Tuesday and Thursday delivery with 17:00 cutoffs
 * Wishlist, account, our store, delivery, contact and terms pages
-* Responsive from phone to desktop; cart, wishlist and chosen area are kept in the browser
+* English, French and German, switchable from the top bar or the menu; dates follow the chosen language
+* Custom illustrations (delivery van, basket, empty states, order confirmation) and motion: scroll reveals, a fly to cart animation, animated tabs and page transitions, all switched off for visitors who prefer reduced motion
+* Responsive from phone to desktop; cart, wishlist, language and chosen area are kept in the browser
 
 ## Content
 
@@ -27,12 +29,25 @@ A redesign of [marchetropical.lu](https://www.marchetropical.lu), the African, C
 ```
 index.html        built page, open this
 build.py          rebuilds index.html from src/ and data/
-src/              base.css, theme.css, body.html, app.js, packshot.js
+src/              base.css, theme.css, motion.css, body.html, app.js, i18n.js (EN, FR, DE), illustrations.js, packshot.js
 data/             products.json, images.json (embedded product photos), logo.json
 assets/logo.png   the Marché Tropical logo
 ```
 
 After editing anything in `src/` or `data/`, run `python3 build.py`.
+
+## Photography
+
+Lifestyle photos are free to use under the [Unsplash License](https://unsplash.com/license) and are loaded from Unsplash:
+
+* African food spread and jollof with grilled fish: Keesha's Kitchen
+* Egusi soup: Tosan Dudun
+* Jamaican jerk: Ronise daluz
+* Chicken biryani: Super deluxe kitchen
+* Spice market: diego fabra
+* Fruit stand trader: Omotayo Tajudeen
+
+When a photo cannot load, a matching illustration is shown instead.
 
 ## Product photos
 

@@ -12,7 +12,7 @@ html = f"""<!doctype html>
 <meta name="description" content="African, Caribbean and Asian groceries from Remich, delivered across Luxembourg.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<style>{read("src/base.css")}{read("src/theme.css")}</style>
+<style>{read("src/base.css")}{read("src/theme.css")}{read("src/motion.css")}</style>
 </head>
 <body>
 {read("src/body.html").replace("__LOGO__", logo)}
@@ -20,6 +20,8 @@ html = f"""<!doctype html>
 const PRODUCTS = {read("data/products.json")};
 const IMG = {read("data/images.json")};
 {read("src/packshot.js")}
+{read("src/i18n.js")}
+{read("src/illustrations.js")}
 {read("src/app.js")}
 </script>
 </body>
