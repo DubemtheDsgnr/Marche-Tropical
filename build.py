@@ -11,7 +11,7 @@ html = f"""<!doctype html>
 <title>Marché Tropical</title>
 <meta name="description" content="African, Caribbean and Asian groceries from Remich, delivered across Luxembourg.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap">
 <style>{read("src/base.css")}{read("src/theme.css")}{read("src/motion.css")}</style>
 </head>
 <body>

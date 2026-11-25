@@ -99,7 +99,13 @@ function drawHome() {
   drawRecipesHome();
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
   const cc = {}; P.forEach(p => cc[p.cat] = (cc[p.cat] || 0) + 1);
-  $('#aislerow').innerHTML = AI.slice(0, 7).concat(AI.slice(7, 14)).map(([c, i]) => `<a class="aisle3" href="#shop" data-cat="${esc(c)}"><span class="c">${pic(P[i])}</span>${esc(c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'))}<small>${T(cc[c] === 1 ? 'nItem' : 'nItems', { n: cc[c] })}</small></a>`).join('');
+  /* products piled into the big cart: back row first, front row last */
+  const slots = [[4, 3, 24, -8], [21, 0, 22, 6], [37, -4, 24, -3], [55, -2, 22, 7], [72, 2, 24, -6],
+                 [9, 22, 25, 5], [28, 20, 24, -4], [47, 18, 25, 4], [66, 21, 25, -7],
+                 [16, 40, 26, -3], [38, 38, 26, 5], [58, 40, 26, -5]];
+  const order = [1, 4, 3, 12, 11, 0, 7, 2, 9, 10, 5, 6];
+  $('#cartItems').innerHTML = order.slice(0, slots.length).map((k, n) => { const [c, id] = AI[k], [l, t, w, r] = slots[n]; const lbl = c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'); return `<a class="bc-it" href="#shop" data-cat="${esc(c)}" style="left:${l}%;top:${t}%;width:${w}%;--r:${r}deg;--i:${n}" aria-label="${esc(lbl)}"><span class="bc-img">${pic(P[id], true)}</span><span class="bc-tag">${esc(lbl)}</span></a>`; }).join('');
+  $('#aisleChips').innerHTML = AI.map(([c]) => { const lbl = c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'); return `<li><a href="#shop" data-cat="${esc(c)}">${esc(lbl)}<small>${cc[c]}</small></a></li>`; }).join('');
   drawPicks('staples');
   $('#bulkList').innerHTML = P.filter(isBulk).map(p => `<a class="bk" href="#product" data-pid="${p.id}"><span class="im">${pic(p)}</span><span><b>${esc(p.name)}</b><small>${esc(p.brand)}</small></span><span class="p">${eur(p.price)}<small>${eur(p.price / kg(p))} / kg</small></span></a>`).join('');
   $('#zcArea').innerHTML = '<option value="">Or choose your area</option>' + AREAS.map(([n, z]) => `<option value="${esc(n)}|${z}">${esc(n)}</option>`).join('');

@@ -6,7 +6,7 @@
 <title>Marché Tropical</title>
 <meta name="description" content="African, Caribbean and Asian groceries from Remich, delivered across Luxembourg.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap">
 <style>:root {
   color-scheme: light;
   --hd: #0A3D2C; --hd2: #0F5A3F; --bg: #E9EEEA; --card: #FFFFFF; --ink: #0F1A14; --ink2: #4A5650; --line: #D5DBD7;
@@ -1091,6 +1091,35 @@ img.real { object-fit: contain; background: #fff; }
 .slots { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) { .reelrow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .slots { grid-template-columns: repeat(2, minmax(0, 1fr)); } .reels { padding-top: 48px; } .reelrow { gap: 10px; } }
+
+/* ===== big shopping cart aisles ===== */
+.cart3 { padding-top: 80px; }
+.cart3-in { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; padding: 48px; border-radius: 28px; background: var(--cream); border: 1px solid var(--line); overflow: hidden; }
+.script { font-family: 'Caveat', 'Segoe Script', 'Brush Script MT', cursive; font-weight: 700; font-size: clamp(46px, 5.4vw, 78px); line-height: .95; letter-spacing: -0.01em; margin: 12px 0 16px; color: var(--ink); text-wrap: balance; }
+.c3copy p { margin: 0 0 26px; font-size: 17px; line-height: 1.6; color: var(--ink2); max-width: 44ch; }
+.aislechips { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.aislechips a { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink) !important; font-size: 13.5px; font-weight: 600; text-decoration: none !important; transition: border-color .15s, background .15s; }
+.aislechips a:hover { border-color: var(--or); background: var(--orT); }
+.aislechips small { font-size: 11.5px; color: var(--ink2); font-weight: 500; }
+.bigcart { position: relative; aspect-ratio: 640 / 520; width: 100%; }
+.bc-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.bc-items { position: absolute; left: 16%; right: 5%; top: -2%; height: 64%; z-index: 2; }
+.bc-it { position: absolute; display: block; aspect-ratio: 1 / 1; rotate: var(--r); transition: transform .25s cubic-bezier(.2,.7,.2,1), z-index 0s; text-decoration: none !important; }
+.bc-img { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; filter: drop-shadow(0 10px 12px rgba(22,32,26,.22)); }
+.bc-img img, .bc-img svg { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.bc-it:hover, .bc-it:focus-visible { transform: translateY(-14px) scale(1.1); z-index: 5; }
+.bc-tag { position: absolute; left: 50%; bottom: 100%; translate: -50% 0; padding: 5px 10px; border-radius: 8px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; rotate: calc(var(--r) * -1); }
+.bc-it:hover .bc-tag, .bc-it:focus-visible .bc-tag { opacity: 1; }
+.bigcart .bc-it { opacity: 0; transform: translateY(-120px); }
+.bigcart.in .bc-it { animation: dropIn .7s cubic-bezier(.3,1.4,.5,1) forwards; animation-delay: calc(.25s + var(--i) * .07s); }
+.bigcart.in .bc-it:hover { transform: translateY(-14px) scale(1.1); }
+.bigcart.in .bc-w { animation: spin 1.4s linear 2; transform-box: fill-box; transform-origin: center; }
+@keyframes dropIn { 0% { opacity: 0; transform: translateY(-120px); } 70% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .bigcart .bc-it { opacity: 1; transform: none; } }
+@media (max-width: 1000px) { .cart3-in { grid-template-columns: minmax(0, 1fr); padding: 32px; gap: 24px; } .bigcart { max-width: 620px; justify-self: center; } }
+@media (max-width: 640px) { .cart3 { padding-top: 48px; } .cart3-in { padding: 22px 18px; border-radius: 20px; } .bc-tag { display: none; } .aislechips a { font-size: 12.5px; padding: 6px 10px; } }
+.bc-img { background: #fff; border-radius: 16px; padding: 9%; box-shadow: 0 12px 24px rgba(22,32,26,.16), 0 0 0 1px rgba(22,32,26,.05); filter: none; }
+.bc-img img, .bc-img svg { mix-blend-mode: normal; }
 </style>
 </head>
 <body>
@@ -1193,9 +1222,29 @@ img.real { object-fit: contain; background: #fff; }
 <div class="reelrow"><figure class="reel rv" style="--d:0.00s"><video muted loop playsinline preload="metadata" poster="media/buffet-1.jpg" aria-label="The full spread"><source src="media/buffet-1.mp4" type="video/mp4"></video><figcaption>The full spread</figcaption></figure><figure class="reel rv" style="--d:0.08s"><video muted loop playsinline preload="metadata" poster="media/buffet-2.jpg" aria-label="Jollof and grilled chicken"><source src="media/buffet-2.mp4" type="video/mp4"></video><figcaption>Jollof and grilled chicken</figcaption></figure><figure class="reel rv" style="--d:0.16s"><video muted loop playsinline preload="metadata" poster="media/buffet-3.jpg" aria-label="Party jollof"><source src="media/buffet-3.mp4" type="video/mp4"></video><figcaption>Party jollof</figcaption></figure><figure class="reel rv" style="--d:0.24s"><video muted loop playsinline preload="metadata" poster="media/buffet-4.jpg" aria-label="Chicken, jollof and fufu"><source src="media/buffet-4.mp4" type="video/mp4"></video><figcaption>Chicken, jollof and fufu</figcaption></figure></div>
 </section>
 
-<section class="wrap aisles3" aria-label="Aisles">
-<div class="sec-h rv"><div><span class="eyebrow">Browse the aisles</span><h2>Everything on our shelves</h2></div><a class="more-l" href="#shop" data-cat="">View all products <span aria-hidden="true">→</span></a></div>
-<div class="aislerow" id="aislerow"></div>
+<section class="wrap cart3" aria-label="Aisles">
+<div class="cart3-in">
+<div class="c3copy rv">
+<span class="eyebrow">Browse the aisles</span>
+<h2 class="script">Fill your cart with the taste of home</h2>
+<p>Spices, rice, gari, cold drinks, sauces and hair care. Everything on our shelves, delivered to your door.</p>
+<div class="h3cta"><a class="btn y lg" href="#shop" data-cat="">Start shopping <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost lg" href="#recipes">Get recipe ideas</a></div>
+<ul class="aislechips" id="aisleChips"></ul>
+</div>
+<div class="bigcart rv-zoom" id="bigCart">
+<div class="bc-items" id="cartItems"></div>
+<svg class="bc-svg" viewBox="0 0 640 520" aria-hidden="true">
+<ellipse cx="330" cy="500" rx="250" ry="14" fill="#16201A" opacity=".08"/>
+<path d="M18 40h70l26 64" fill="none" stroke="#16201A" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M102 104h512l-52 236H162z" fill="#FF6500" opacity=".12"/>
+<path d="M102 104h512l-52 236H162z" fill="none" stroke="#16201A" stroke-width="14" stroke-linejoin="round"/>
+<g stroke="#FF6500" stroke-width="8" opacity=".9"><path d="M120 162h478M136 222h448M150 282h418"/><path d="M200 104l22 236M300 104l12 236M400 104l2 236M500 104l-8 236"/></g>
+<path d="M162 340l-14 52h388" fill="none" stroke="#16201A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="bc-w"><circle cx="196" cy="438" r="34" fill="#16201A"/><circle cx="196" cy="438" r="13" fill="#FBF6EE"/></g>
+<g class="bc-w"><circle cx="496" cy="438" r="34" fill="#16201A"/><circle cx="496" cy="438" r="13" fill="#FBF6EE"/></g>
+</svg>
+</div>
+</div>
 </section>
 
 <section class="wrap picks" aria-label="Popular products">
@@ -1859,6 +1908,9 @@ const DICT = {
 "Jollof rice, fried rice, grilled chicken and fufu: the dishes our shelves are stocked for.": ["Riz jollof, riz frit, poulet grillé et fufu : les plats pour lesquels nos rayons sont remplis.", "Jollof Reis, gebratener Reis, gegrilltes Hähnchen und Fufu: die Gerichte, für die unsere Regale gefüllt sind."],
 "The full spread": ["Le buffet complet", "Das ganze Buffet"], "Jollof and grilled chicken": ["Jollof et poulet grillé", "Jollof und gegrilltes Hähnchen"], "Party jollof": ["Jollof de fête", "Party Jollof"], "Chicken, jollof and fufu": ["Poulet, jollof et fufu", "Hähnchen, Jollof und Fufu"],
 "A buffet of jollof rice, fried rice, grilled chicken and fufu": ["Un buffet de riz jollof, riz frit, poulet grillé et fufu", "Ein Buffet mit Jollof Reis, gebratenem Reis, gegrilltem Hähnchen und Fufu"],
+"Fill your cart with the taste of home": ["Remplissez votre panier du goût de chez vous", "Füllen Sie Ihren Warenkorb mit dem Geschmack von Zuhause"],
+"Spices, rice, gari, cold drinks, sauces and hair care. Everything on our shelves, delivered to your door.": ["Épices, riz, gari, boissons fraîches, sauces et soins capillaires. Tout ce qu'il y a dans nos rayons, livré chez vous.", "Gewürze, Reis, Gari, kalte Getränke, Saucen und Haarpflege. Alles aus unseren Regalen, bis an Ihre Tür geliefert."],
+"Get recipe ideas": ["Idées de recettes", "Rezeptideen"],
 "Recipes from our kitchens": ["Recettes de nos cuisines", "Rezepte aus unseren Küchen"],
 "Recipes": ["Recettes", "Rezepte"], "All recipes": ["Toutes les recettes", "Alle Rezepte"], "View recipe": ["Voir la recette", "Zum Rezept"],
 "Ingredients": ["Ingrédients", "Zutaten"], "From our shelves": ["Dans nos rayons", "Aus unseren Regalen"], "You'll also need": ["Il vous faudra aussi", "Außerdem brauchen Sie"],
@@ -2248,7 +2300,13 @@ function drawHome() {
   drawRecipesHome();
   const AI = [['Spices & Seasoning', 4], ['Rice, Pasta & Noodles', 9], ['Gari & Fufu', 72], ['Drinks', 14], ['Sauces & Marinades', 5], ['Beans', 74], ['Canned', 30], ['Coconut Milk', 24], ['Flour & Grains', 67], ['Sweets & Snacks', 25], ['Dried Herbs', 0], ['Tea & Coffee', 17], ['Hair, Beauty & Health', 43]];
   const cc = {}; P.forEach(p => cc[p.cat] = (cc[p.cat] || 0) + 1);
-  $('#aislerow').innerHTML = AI.slice(0, 7).concat(AI.slice(7, 14)).map(([c, i]) => `<a class="aisle3" href="#shop" data-cat="${esc(c)}"><span class="c">${pic(P[i])}</span>${esc(c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'))}<small>${T(cc[c] === 1 ? 'nItem' : 'nItems', { n: cc[c] })}</small></a>`).join('');
+  /* products piled into the big cart: back row first, front row last */
+  const slots = [[4, 3, 24, -8], [21, 0, 22, 6], [37, -4, 24, -3], [55, -2, 22, 7], [72, 2, 24, -6],
+                 [9, 22, 25, 5], [28, 20, 24, -4], [47, 18, 25, 4], [66, 21, 25, -7],
+                 [16, 40, 26, -3], [38, 38, 26, 5], [58, 40, 26, -5]];
+  const order = [1, 4, 3, 12, 11, 0, 7, 2, 9, 10, 5, 6];
+  $('#cartItems').innerHTML = order.slice(0, slots.length).map((k, n) => { const [c, id] = AI[k], [l, t, w, r] = slots[n]; const lbl = c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'); return `<a class="bc-it" href="#shop" data-cat="${esc(c)}" style="left:${l}%;top:${t}%;width:${w}%;--r:${r}deg;--i:${n}" aria-label="${esc(lbl)}"><span class="bc-img">${pic(P[id], true)}</span><span class="bc-tag">${esc(lbl)}</span></a>`; }).join('');
+  $('#aisleChips').innerHTML = AI.map(([c]) => { const lbl = c.replace(', Pasta & Noodles', '').replace(' & Seasoning', '').replace(', Beauty & Health', ' & beauty'); return `<li><a href="#shop" data-cat="${esc(c)}">${esc(lbl)}<small>${cc[c]}</small></a></li>`; }).join('');
   drawPicks('staples');
   $('#bulkList').innerHTML = P.filter(isBulk).map(p => `<a class="bk" href="#product" data-pid="${p.id}"><span class="im">${pic(p)}</span><span><b>${esc(p.name)}</b><small>${esc(p.brand)}</small></span><span class="p">${eur(p.price)}<small>${eur(p.price / kg(p))} / kg</small></span></a>`).join('');
   $('#zcArea').innerHTML = '<option value="">Or choose your area</option>' + AREAS.map(([n, z]) => `<option value="${esc(n)}|${z}">${esc(n)}</option>`).join('');
