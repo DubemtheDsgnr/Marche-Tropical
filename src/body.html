@@ -1,0 +1,254 @@
+<div class="util"><div class="wrap util-in">
+<span class="util-l"><span class="dot"></span>Delivery every <b>Tuesday &amp; Thursday</b><span class="sep">·</span>Pay on delivery<span class="sep hide-s">·</span><span class="hide-s">Free delivery in Remich from 25 €</span></span>
+<span class="util-r"><span id="openToday"></span><span class="sep">·</span><a href="#contact">Help</a><span class="sep">·</span><span class="lang"><b>EN</b> / FR</span></span>
+</div></div>
+<header class="hd" id="top">
+<div class="wrap hd-in">
+<button class="ibtn hamb" id="burger" aria-label="Open all departments" aria-controls="side" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<a class="logo" href="#home" aria-label="Marché Tropical home"><img class="logo-img" src="__LOGO__" alt="Marché Tropical" width="342" height="120"></a>
+<form class="search" id="hsearch" role="search">
+<svg class="s-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+<label class="sr" for="hq">Search products</label><input id="hq" type="search" placeholder="Search gari, basmati, jerk seasoning, Cantu…" autocomplete="off">
+<label class="sr" for="scat">Department</label><select id="scat" class="scat"><option value="">All departments</option></select>
+<button class="sbtn" type="submit">Search</button>
+<div class="suggest" id="suggest" hidden></div>
+</form>
+<div class="hd-actions">
+<button class="deliver" id="deliverBtn"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><small>Deliver to</small><b id="deliverTo">Choose area</b></span></button>
+<a class="ibtn acct" href="#account" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="lbl">Account</span></a>
+<a class="ibtn" href="#wishlist" aria-label="Wishlist"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg><span class="lbl">Saved</span><span class="badge alt" id="wishCount">0</span></a>
+<a class="ibtn cartlink" href="#cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="lbl">Cart</span><span class="badge" id="cartCount">0</span></a>
+</div>
+</div>
+<nav class="catnav" aria-label="Departments"><div class="wrap catnav-in">
+<button class="allbtn" id="allBtn"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>All departments</button>
+<span class="vr" aria-hidden="true"></span>
+<a href="#shop" data-cat="Spices & Seasoning">Spices</a><a href="#shop" data-cat="Rice, Pasta & Noodles">Rice</a><a href="#shop" data-cat="Gari & Fufu">Gari &amp; fufu</a><a href="#shop" data-cat="Sauces & Marinades">Sauces</a><a href="#shop" data-cat="Drinks">Drinks</a><a href="#shop" data-cat="Beans">Beans</a><a href="#shop" data-cat="Hair, Beauty & Health">Hair &amp; beauty</a><a href="#shop" data-deal="bulk">Bulk</a><a href="#shop" data-deal="under2" class="hot">Under 2 €</a>
+<span class="kitnav"><span class="muted">Shop by kitchen</span><a href="#shop" data-kitchen="African" class="k k-af">African</a><a href="#shop" data-kitchen="Caribbean" class="k k-ca">Caribbean</a><a href="#shop" data-kitchen="Asian" class="k k-as">Asian</a></span>
+</div></nav>
+</header>
+<div class="demo-banner">Demo of the new Marché Tropical store. Orders and forms are not connected to the shop yet. Product photos are illustrative.</div>
+
+
+<div class="side-bg" id="sideBg" hidden></div>
+<aside class="side-nav" id="side" hidden aria-label="All categories">
+<div class="side-hd"><span class="avatar" aria-hidden="true"></span><b>Hello, sign in</b><button class="xbtn" id="sideClose" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<div class="side-body"><h3>Shop by department</h3><div id="sideCats"></div><h3>Deals</h3><a href="#shop" data-deal="under2">Under 2 €</a><a href="#shop" data-deal="bulk">Bulk buys</a><h3>Help and settings</h3><a href="#account">Your account</a><a href="#delivery">Delivery zones and fees</a><a href="#about">Our store in Remich</a><a href="#contact">Customer service</a><a href="#terms">Terms of sale</a></div>
+</aside>
+
+<main id="main">
+
+<!-- HOME -->
+<section class="route" data-route="home" hidden>
+
+<section class="hero3"><div class="wrap hero3-in">
+<div class="h3copy">
+<span class="eyebrow">Tropical grocer · Remich, Luxembourg</span>
+<h1>Groceries from Africa, the Caribbean and Asia, <em>delivered</em> across Luxembourg.</h1>
+<p>From gari and egusi to jerk seasoning and basmati, we stock the brands you grew up with. Order online, we deliver on Tuesday and Thursday, and you pay at the door.</p>
+<div class="h3cta"><a class="btn y lg" href="#shop" data-cat="">Start shopping</a><button class="btn ghost lg" data-scroll="zoneCheck">Check your delivery zone</button></div>
+<ul class="h3facts"><li><b>860+</b><span>products in store</span></li><li><b>8</b><span>delivery zones</span></li><li><b>0 €</b><span>delivery in Remich from 25 €</span></li></ul>
+</div>
+<div class="h3art" aria-hidden="true">
+<div class="sun"></div>
+<svg class="leaf l1" viewBox="0 0 120 200"><path d="M60 196C20 150 4 96 22 46 32 18 50 6 60 2c10 4 28 16 38 44 18 50 2 104-38 150z" fill="#0F6D1E"/><path d="M60 190V10" stroke="#0A4614" stroke-width="3"/><path d="M60 60l-22-18M60 90l-28-20M60 120l-28-18M60 60l22-18M60 90l28-20M60 120l28-18" stroke="#0A4614" stroke-width="2" fill="none"/></svg>
+<svg class="leaf l2" viewBox="0 0 120 200"><path d="M60 196C20 150 4 96 22 46 32 18 50 6 60 2c10 4 28 16 38 44 18 50 2 104-38 150z" fill="#2E8B3E"/><path d="M60 190V10" stroke="#0F6D1E" stroke-width="3"/></svg>
+<div class="still" id="still"></div>
+<div class="ticket"><span class="t-k">Next delivery</span><b id="tDay"></b><span id="tCut"></span></div>
+</div>
+</div></section>
+
+<section class="kitchens wrap" aria-label="Shop by kitchen">
+<div class="sec-h"><div><span class="eyebrow">Shop by kitchen</span><h2>Cook the way you do at home</h2></div></div>
+<div class="kgrid" id="kgrid"></div>
+</section>
+
+<section class="wrap aisles3" aria-label="Aisles">
+<div class="sec-h"><div><span class="eyebrow">Browse the aisles</span><h2>Everything on our shelves</h2></div><a class="more-l" href="#shop" data-cat="">View all products →</a></div>
+<div class="aislerow" id="aislerow"></div>
+</section>
+
+<section class="wrap picks" aria-label="Popular products">
+<div class="sec-h"><div><span class="eyebrow">This week</span><h2>Popular in the shop</h2></div>
+<div class="tabs" role="tablist" id="pickTabs"><button role="tab" data-tab="staples" aria-selected="true">Pantry staples</button><button role="tab" data-tab="spice" aria-selected="false">Spice rack</button><button role="tab" data-tab="drinks" aria-selected="false">Cold drinks</button><button role="tab" data-tab="under2" aria-selected="false">Under 2 €</button></div></div>
+<div class="prow" id="pickRow" role="tabpanel"></div>
+</section>
+
+<section class="wrap bulkband"><div class="bulk-in">
+<div class="bulk-copy"><span class="eyebrow light">Bulk buys</span><h2>Feeding a big family or planning a party?</h2><p>Rice by the sack works out cheaper per kilo. Delivery is free once your order passes your zone's threshold.</p><a class="btn y" href="#shop" data-deal="bulk">Shop bulk rice</a></div>
+<div class="bulk-list" id="bulkList"></div>
+</div></section>
+
+<section class="wrap delivery3" id="zoneCheck">
+<div class="d3-steps">
+<span class="eyebrow">How delivery works</span><h2>Order today, eat well this week</h2>
+<ol class="steps3"><li><b>Fill your cart</b><span>Order by Monday 17:00 for Tuesday, or by Wednesday 17:00 for Thursday.</span></li><li><b>We pack and deliver</b><span>Between 12:00 and 18:00, up to the 2nd floor in buildings without a lift.</span></li><li><b>Pay at the door</b><span>No card needed online. Pay the driver when your order arrives.</span></li></ol>
+</div>
+<div class="zcheck card">
+<h3>Check your delivery zone</h3>
+<p class="muted small">Enter a postcode or pick your area to see your fee and minimum order.</p>
+<div class="zc-row"><label class="sr" for="zcPc">Postcode</label><input class="input" id="zcPc" inputmode="numeric" placeholder="Postcode, e.g. 5532"><label class="sr" for="zcArea">Area</label><select class="input" id="zcArea"></select></div>
+<div class="zc-out" id="zcOut"></div>
+</div>
+</section>
+
+<section class="wrap recent3" id="recentWrap" hidden><div class="sec-h"><div><span class="eyebrow">Pick up where you left off</span><h2>Recently viewed</h2></div><button class="lnk" id="clearRecent">Clear history</button></div><div class="prow" id="rowRecent"></div></section>
+
+<section class="wrap visit3"><div class="visit-in">
+<div><span class="eyebrow light">Visit the shop</span><h2>39 Rue Enz, Remich</h2><p>Come in to browse fresh produce, frozen fish and meat, and everything that doesn't fit on a website.</p><div class="btnrow"><a class="btn y" href="https://www.google.com/maps/search/?api=1&amp;query=39+Rue+Enz+5532+Remich" target="_blank" rel="noopener">Get directions</a><a class="btn ghost light" href="#about">Opening hours</a></div></div>
+<table class="hours light"><tbody><tr><th>Monday</th><td>14:00 to 19:00</td></tr><tr><th>Tuesday</th><td>14:00 to 19:00</td></tr><tr><th>Wednesday</th><td>09:00 to 19:00</td></tr><tr><th>Thursday</th><td>09:00 to 19:00</td></tr><tr><th>Friday</th><td>09:00 to 19:00</td></tr><tr><th>Saturday</th><td>11:00 to 19:00</td></tr><tr class="off"><th>Sunday</th><td>Closed</td></tr></tbody></table>
+</div></section>
+
+<section class="wrap news3"><div><h2>New on the shelves, first.</h2><p class="muted">Restocks and new arrivals, straight to your inbox.</p></div><form class="news-form" data-demo="Thanks! You're on the list for this demo."><label class="sr" for="nEm">Email address</label><input class="input" id="nEm" type="email" placeholder="you@example.com"><button class="btn y" type="submit">Subscribe</button></form></section>
+</section>
+
+<!-- RESULTS -->
+<section class="route" data-route="shop" hidden>
+<div class="resbar"><div class="wrap resbar-in"><span id="resCount"></span><label class="sortlbl">Sort by: <select id="sort"><option value="feat">Featured</option><option value="asc">Price: Low to High</option><option value="desc">Price: High to Low</option><option value="az">Name: A to Z</option></select></label></div></div>
+<div class="wrap results">
+<aside class="filters" aria-label="Filters">
+<button class="fbtn" id="fToggle" aria-expanded="false" aria-controls="fBody">Filters</button>
+<div id="fBody">
+<div class="fgrp"><h3>Department</h3><div id="fCats"></div></div>
+<div class="fgrp"><h3>Price</h3><div id="fPrice"></div></div>
+<div class="fgrp"><h3>Brand</h3><div id="fBrands"></div><button class="lnk" id="moreBrands">See more</button></div>
+<div class="fgrp"><h3>Delivery</h3><p class="small">Every order is delivered on Tuesday or Thursday and paid on delivery.</p></div>
+</div>
+</aside>
+<section aria-label="Results">
+<div class="chips" id="activeChips"></div>
+<h1 class="resh">Results</h1>
+<p class="small muted" style="margin:-6px 0 14px">Check each product page for full details. Photos are illustrative stock images.</p>
+<div class="grid" id="grid"></div>
+<div class="empty card" id="empty" hidden><h2>No results</h2><p>Try different words or <button class="lnk" id="clearAll">clear all filters</button>.</p></div>
+<nav class="pager" id="pager" aria-label="Pages"></nav>
+</section>
+</div>
+</section>
+
+<!-- PRODUCT -->
+<section class="route" data-route="product" hidden><div class="wrap pdwrap">
+<nav class="crumbs small" aria-label="Breadcrumb"><a href="#shop" data-cat="">All</a> › <a href="#shop" id="pdCatLink"></a></nav>
+<div class="pd">
+<div class="pd-media"><div class="pd-thumbs" id="thumbs"></div><div class="pd-stage" id="pdStage"></div></div>
+<div class="pd-info">
+<h1 id="pdName"></h1>
+<button class="lnk" id="pdBrandLink"></button>
+<hr>
+<div class="pprice big" id="pdPrice"></div>
+<p class="small muted">Price includes VAT. <span id="pdUnit"></span></p>
+<hr>
+<table class="spec"><tbody id="pdSpec"></tbody></table>
+<hr>
+<h2 class="about-h">About this item</h2>
+<ul class="about" id="pdAbout"></ul>
+<p class="small muted">Product photo is an illustrative stock image. The pack you receive may look different.</p>
+</div>
+<aside class="buybox" aria-label="Buy">
+<div class="pprice" id="bbPrice"></div>
+<p class="bbdel">Delivery <b id="bbDay"></b>, 12:00 to 18:00. <span id="bbFee"></span></p>
+<p class="bbloc"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><button class="lnk" data-open-zone>Deliver to <span class="bbZone"></span></button></p>
+<p class="avail">Available from the shop</p>
+<label class="qsel">Quantity: <select id="pdQty"></select></label>
+<button class="btn y full" id="pdAdd">Add to Cart</button>
+<button class="btn o full" id="pdBuy">Buy Now</button>
+<table class="ships small"><tbody><tr><td>Ships from</td><td>Marché Tropical</td></tr><tr><td>Sold by</td><td>Marché Tropical, Remich</td></tr><tr><td>Payment</td><td>Pay on delivery</td></tr><tr><td>Returns</td><td><a href="#terms">14 days, non perishables</a></td></tr></tbody></table>
+<button class="btn w full" id="pdWish">Add to Wishlist</button>
+</aside>
+</div>
+<section class="strip flat"><div class="strip-hd"><h2 id="relH">More in this department</h2></div><div class="row" id="related"></div></section>
+<section class="strip flat" id="brandWrap"><div class="strip-hd"><h2 id="brandH"></h2></div><div class="row" id="brandRow"></div></section>
+</div></section>
+
+<!-- CART -->
+<section class="route" data-route="cart" hidden><div class="wrap cartwrap" id="cartPage"></div></section>
+
+<!-- CHECKOUT -->
+<section class="route" data-route="checkout" hidden><div class="wrap cowrap">
+<h1 class="coh">Checkout (<span id="coItems"></span>)</h1>
+<div class="checkout">
+<div class="co-main">
+<section class="co-sec card" id="sec1"><h2><span>1</span> Delivery address</h2><div class="co-body">
+<div class="form-grid">
+<div class="field"><label for="fn">First name</label><input class="input" id="fn" autocomplete="given-name"></div>
+<div class="field"><label for="ln">Last name</label><input class="input" id="ln" autocomplete="family-name"></div>
+<div class="field"><label for="em">Email</label><input class="input" id="em" type="email" autocomplete="email"></div>
+<div class="field"><label for="ph">Phone</label><input class="input" id="ph" type="tel" autocomplete="tel"></div>
+<div class="field full"><label for="ad">Street and number</label><input class="input" id="ad" autocomplete="street-address"></div>
+<div class="field"><label for="pc">Postcode</label><input class="input" id="pc" inputmode="numeric" autocomplete="postal-code"></div>
+<div class="field"><label for="ci">Town</label><input class="input" id="ci" autocomplete="address-level2"></div>
+<div class="field full"><label for="zone">Delivery area</label><select class="input" id="zone"></select><p class="hint" id="zoneHint">Your postcode can fill this in.</p></div>
+<div class="field full"><label for="fl">Floor and access notes (optional)</label><input class="input" id="fl" placeholder="For example: 2nd floor, no lift"></div>
+</div><p class="err" id="err1" role="alert" hidden></p></div></section>
+<section class="co-sec card"><h2><span>2</span> Delivery day</h2><div class="co-body"><div class="slots" id="slots"></div></div></section>
+<section class="co-sec card"><h2><span>3</span> Payment</h2><div class="co-body"><label class="radio"><input type="radio" checked name="pay"><span><b>Pay on delivery</b><br><span class="small muted">Pay the driver when your order arrives.</span></span></label></div></section>
+<section class="co-sec card"><h2><span>4</span> Review items</h2><div class="co-body" id="coLines"></div></section>
+</div>
+<aside class="card co-sum" id="coSum"></aside>
+</div></div></section>
+
+<!-- ORDER -->
+<section class="route" data-route="order" hidden><div class="wrap">
+<div class="card confirm"><div class="okmark" aria-hidden="true">✓</div><div><h1>Order placed, thank you <span id="oName"></span>!</h1><p>This is a demo, so nothing was sent to the shop. On the live store, confirmation of order <b id="oRef"></b> would arrive by email.</p><div id="oBody"></div><div class="btnrow"><a class="btn y" href="#shop">Continue shopping</a><a class="btn w" href="#home">Back to home</a></div></div></div>
+</div></section>
+
+<!-- WISHLIST -->
+<section class="route" data-route="wishlist" hidden><div class="wrap">
+<div class="card listwrap"><h1>Your Wishlist</h1><p class="small muted">Saved in this browser.</p><div id="wishList"></div></div>
+</div></section>
+
+<!-- ACCOUNT -->
+<section class="route" data-route="account" hidden><div class="wrap narrow">
+<div class="card auth"><span class="logo authlogo"><img class="logo-img" src="__LOGO__" alt="Marché Tropical" width="342" height="120"></span><h1>Sign in</h1><form data-demo="Accounts are not part of this demo yet. On the live store, sign in uses the shop's Odoo customer accounts."><div class="field"><label for="ae">Email or mobile number</label><input class="input" id="ae" autocomplete="username"></div><button class="btn y full" type="submit">Continue</button></form><p class="small muted">By continuing, you agree to the <a href="#terms">terms of sale</a>.</p><div class="divider"><span>New to Marché Tropical?</span></div><button class="btn w full" type="button" data-demo-btn>Create your account</button></div>
+</div></section>
+
+<!-- ABOUT -->
+<section class="route" data-route="about" hidden><div class="wrap">
+<div class="card page"><h1>Our store in Remich</h1><p class="lead">Our shop stocks African, Asian and Caribbean products alongside quality local and European goods. Come in and find ingredients from every corner of the tropics.</p>
+<div class="two"><div><h2>Opening hours</h2><table class="hours"><tbody><tr><th>Monday</th><td>14:00 to 19:00</td></tr><tr><th>Tuesday</th><td>14:00 to 19:00</td></tr><tr><th>Wednesday</th><td>09:00 to 19:00</td></tr><tr><th>Thursday</th><td>09:00 to 19:00</td></tr><tr><th>Friday</th><td>09:00 to 19:00</td></tr><tr><th>Saturday</th><td>11:00 to 19:00</td></tr><tr class="off"><th>Sunday</th><td>Closed</td></tr></tbody></table></div>
+<div><h2>Find us</h2><p>39 Rue Enz<br>5532 Remich, Luxembourg</p><p>+352 621 751 400<br>info@marchetropical.lu</p><a class="btn y" href="https://www.google.com/maps/search/?api=1&amp;query=39+Rue+Enz+5532+Remich" target="_blank" rel="noopener">Get directions</a><div class="mosaic" id="mosaic"></div></div></div></div>
+</div></section>
+
+<!-- DELIVERY -->
+<section class="route" data-route="delivery" hidden><div class="wrap">
+<div class="card page"><h1>Delivery zones and fees</h1><p class="lead">We deliver on Tuesdays and Thursdays between 12:00 and 18:00. Order by Monday 17:00 for Tuesday and by Wednesday 17:00 for Thursday. You pay on delivery.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Zone</th><th>Area</th><th>Minimum order</th><th>Fee</th><th>Free from</th></tr></thead><tbody id="zoneRows"></tbody></table></div>
+<ul class="bul"><li>Delivery is guaranteed up to the 2nd floor in buildings without a lift.</li><li>Tell us at least 5 hours ahead if you cannot receive your order. If you are out, it may be left at your door or with a neighbour.</li><li>Fees from the terms of sale, section 7.1.</li></ul></div>
+</div></section>
+
+<!-- CONTACT -->
+<section class="route" data-route="contact" hidden><div class="wrap">
+<div class="card page"><h1>Customer service</h1><div class="two"><form data-demo="Thanks, message received. On this demo nothing is sent yet."><div class="form-grid"><div class="field"><label for="cn">Name</label><input class="input" id="cn"></div><div class="field"><label for="ce">Email</label><input class="input" id="ce" type="email"></div><div class="field full"><label for="ct">Topic</label><select class="input" id="ct"><option>A product</option><option>My order</option><option>Delivery</option><option>Something else</option></select></div><div class="field full"><label for="cm">Message</label><textarea class="input" id="cm"></textarea></div><div class="full"><button class="btn y" type="submit">Send</button></div></div></form>
+<div><h2>Reach us</h2><p>+352 621 751 400<br>info@marchetropical.lu</p><p>39 Rue Enz, 5532 Remich</p><p class="muted small">We reply during opening hours: Monday and Tuesday 14:00 to 19:00, Wednesday to Friday 09:00 to 19:00, Saturday 11:00 to 19:00.</p></div></div></div>
+</div></section>
+
+<!-- TERMS -->
+<section class="route" data-route="terms" hidden><div class="wrap">
+<div class="card page doc"><h1>Legal notice and terms of sale</h1><p class="muted">Summary for this demo. The full text stays as published on the current site.</p>
+<h2>Legal notice</h2><p>Marché Tropical, a branch of Jubo Services, Médiation et Consultance Group. 39 Rue Enz, 5532 Remich, Luxembourg. +352 621 751 400, info@marchetropical.lu.</p>
+<h2>Orders and payment</h2><p>Placing an order means you accept these terms. Prices are in euros and include VAT. Payment is made on delivery.</p>
+<h2>Delivery</h2><p>Tuesdays and Thursdays, 12:00 to 18:00. Fees depend on the zone. You give the exact address, day and slot, and tell us at least 5 hours ahead if you cannot receive the order. Delivery is guaranteed up to the 2nd floor in buildings without a lift.</p>
+<h2>Complaints</h2><p>Fresh and frozen products: complaints only on the day of delivery or the next day before midnight, by email with photos. After 24 hours no complaint is accepted.</p>
+<h2>Right of withdrawal</h2><p>14 days, for non perishable products only.</p>
+<h2>Governing law</h2><p>Mediation may be used in case of dispute, otherwise the courts of Luxembourg apply.</p></div>
+</div></section>
+</main>
+
+<footer class="ft3">
+<div class="wrap ft3-top">
+<div class="ft3-brand"><a class="ftlogo" href="#home" aria-label="Marché Tropical home"><img class="logo-img" src="__LOGO__" alt="Marché Tropical" width="342" height="120"></a><p>African, Caribbean and Asian groceries from our shop in Remich, delivered across Luxembourg and to Perl and Sierck les Bains.</p><p class="small">39 Rue Enz, 5532 Remich<br>+352 621 751 400 · info@marchetropical.lu</p></div>
+<div><h4>Shop</h4><a href="#shop" data-cat="">All products</a><a href="#shop" data-kitchen="African">African kitchen</a><a href="#shop" data-kitchen="Caribbean">Caribbean kitchen</a><a href="#shop" data-kitchen="Asian">Asian kitchen</a><a href="#shop" data-deal="bulk">Bulk buys</a></div>
+<div><h4>Delivery</h4><a href="#delivery">Zones and fees</a><a href="#delivery">Tuesday and Thursday</a><a href="#terms">Complaints and returns</a></div>
+<div><h4>Help</h4><a href="#account">Your account</a><a href="#cart">Your cart</a><a href="#wishlist">Saved items</a><a href="#contact">Contact us</a><a href="#terms">Terms of sale</a></div>
+</div>
+<div class="wrap ft3-bot"><span>© 2026 Marché Tropical, branch of Jubo Services, Médiation et Consultance Group</span><span class="pay">Pay on delivery · Prices include VAT</span><button class="lnk light" id="backTop">Back to top ↑</button></div>
+</footer>
+
+<div class="modal-bg" id="zoneModalBg" hidden></div>
+<div class="modal card" id="zoneModal" role="dialog" aria-modal="true" aria-labelledby="zmH" hidden>
+<div class="modal-hd"><h2 id="zmH">Choose your delivery area</h2><button class="xbtn" id="zmClose" aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<p class="small muted">Delivery fees and minimum order depend on your area.</p>
+<div class="zgrid" id="zGrid"></div>
+<div class="zpc"><label for="zpc">Or enter a postcode</label><div class="zpc-row"><input class="input" id="zpc" inputmode="numeric" placeholder="e.g. 5532"><button class="btn w" id="zpcGo">Apply</button></div><p class="small" id="zpcMsg"></p></div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
