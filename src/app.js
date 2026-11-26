@@ -60,12 +60,12 @@ const subtotal = () => ids().reduce((a, k) => a + byId(k).price * cart[k], 0);
 const persist = () => { store.set('mt3-cart', cart); store.set('mt3-saved', saved); store.set('mt3-wish', wish); };
 
 /* ---------- delivery days ---------- */
-/* Delivery: Monday to Friday 20:00 to 22:00, Saturday during the day until 20:00, no Sunday. Orders any time; same day if placed before the slot (Saturday: before 12:00). */
+/* Delivery: Monday to Friday 20:00 to 22:00, Saturday 11:00 to 20:00, no Sunday. Orders any time, no cutoff; same day while the window is still open. */
 function slots(n) {
   const out = [], now = new Date(), d = new Date(now); d.setHours(0, 0, 0, 0);
   for (let i = 0; out.length < n && i < 21; i++) {
     const day = new Date(d); day.setDate(d.getDate() + i); const dow = day.getDay(); if (dow === 0) continue;
-    const last = new Date(day); last.setHours(dow === 6 ? 12 : 20, 0, 0, 0);
+    const last = new Date(day); last.setHours(dow === 6 ? 20 : 22, 0, 0, 0);
     if (now < last) out.push({ date: day, sat: dow === 6, today: i === 0 });
   }
   return out;
